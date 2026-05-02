@@ -1,0 +1,72 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.background {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(211, 211, 211);
+}
+
+.central-box {
+    width: 300px;
+    height: 400px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    background-color: rgba(0, 255, 255, 0.15);
+    display: block;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.logo {
+    padding-top: 40px;
+    padding-left: 90px;
+}
+
+h2 {
+    font-size: 17pt;
+    padding-top: 20px;
+    text-align: center;
+    font-family: Prompt;
+    transition: transform 0.3s linear;
+}
+
+h2:hover {
+    transform: scale(1.1);
+}
+
+a {
+    text-decoration: none;
+    display: flex;
+    border-radius: 10px;
+    background-color: rgba(0, 255, 255, 0.301);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    justify-content: center;
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+a.login-btn {
+    margin-top: 30px;
+    transition: transform 0.1s linear;
+}
+
+a.login-btn:hover {
+    transform: scale(1.05);
+    background-color: rgba(0, 255, 255, 0.55);
+}
+
+a.register-btn {
+    margin-top: 20px;
+    transition: transform 0.1s linear;
+}
+
+a.register-btn:hover {
+    transform: scale(1.05);
+    background-color: rgba(0, 255, 255, 0.55);
+}

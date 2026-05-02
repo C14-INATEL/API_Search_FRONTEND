@@ -1,0 +1,32 @@
+<div class="background">
+        <div class="central-box">
+            <img src="assets/API_logo.png" width="40%" class="logo">
+
+            <form autocomplete="on"> 
+	            <input id="campo-email" type="email" placeholder="Digite seu email" autocomplete="Username">
+                
+                <div class="password-area">
+
+                    <input id="campo-senha" [type]="mostrarSenha ? 'text' : 'password'" placeholder="Digite sua Senha" autocomplete="current-password">
+
+                    <div class="show-icon" *ngIf="mostrarSenha" (click)="toggleSenha()">
+                        <span class="material-symbols-outlined">visibility</span>
+                    </div>
+
+                    <div class="hide-icon" *ngIf="!mostrarSenha" (click)="toggleSenha()">
+                        <span class="material-symbols-outlined">visibility_off</span>
+                    </div>
+
+                </div>
+            </form>
+
+            <div class="return-home-btn-background">
+                <button id="return-home" type="button" routerLink="/">Return to Home</button>
+            </div>
+
+            <div class="login-btn-background">
+                <button id="login-btn">LOGIN</button>
+            </div>
+                
+        </div>
+</div>

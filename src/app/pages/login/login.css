@@ -1,0 +1,150 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.background {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(211, 211, 211);
+}
+
+.central-box {
+    width: 300px;
+    height: 410px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    background-color: rgba(0, 255, 255, 0.15);
+    display: block;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.logo {
+    position: relative;
+    left: 90px;
+    top: 20px;
+    transition: all 200ms linear;
+    border-radius: 100px;
+}
+
+.logo:hover {
+    scale: 1.05;
+}
+
+
+a {
+    text-decoration: none;
+    display: flex;
+    border-radius: 10px;
+    background-color: rgba(0, 255, 255, 0.301);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    justify-content: center;
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+input {
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 40px;
+    margin-left: 40px;
+    background-color: rgba(0, 255, 255, 0.301);
+    font-family: Prompt;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(116, 248, 188, 0.489), 0 6px 20px 0 rgba(0,0,0,0.19);
+    transition: all 200ms linear;
+}
+
+input:hover {
+    background-color: rgba(0, 255, 255, 0.79);
+    box-shadow: rgba(0, 255, 255, 0.575) 0px 7px 29px 0px;
+}
+
+#campo-email {
+    position: relative;
+    transition: all 200ms linear;
+}
+
+#campo-email:hover {
+    scale: 1.05;
+}
+
+.password-area {
+    position: relative;
+    transition: all 200ms linear;
+}
+
+.password-area:hover {
+    scale: 1.05;
+}
+
+.show-icon,
+.hide-icon {
+    position: absolute;
+    left: 230px;
+    top: 75px;
+    padding: 0px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: all 200ms linear;
+}
+
+.show-icon:hover,
+.hide-icon:hover {
+    scale: 1.05;
+}
+
+.return-home-btn-background {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 16px;
+    cursor: pointer;
+    border: 0;
+    background-color: rgba(0, 255, 255, 0.301);
+    box-shadow: rgb(0 0 0 /5%) 0 0 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 10px;
+    transition: all 200ms ease;
+}
+
+button:hover {
+    letter-spacing: 2px;
+    scale: 1.05;
+    box-shadow: rgba(0, 255, 255, 0.575) 0px 7px 29px 0px;
+    background-color: rgba(0, 255, 255, 0.79);
+    transition: 200ms;
+}
+
+
+button:active {
+    letter-spacing: 2px;
+    scale: 1.0;
+    box-shadow: rgba(0, 255, 255, 0.575) 0px 0px 0px 0px;
+    transition: 100ms;
+}
+
+
+.login-btn-background {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+}
+
+#login-btn {
+    position: relative;
+    left: 87px;
+    padding-left: 45px;
+    padding-right: 45px;
+    bottom: 5px;
+}
+
