@@ -1,24 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Master</title>
-    <style>
-@import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-</style>
-</head>
-<body>
-    <div class="background">
-        <div class="central-box">
-            <img src="assets/API_logo.png" width="40%" class="logo">
-
-            <h2> Checking your Security <br> every time </h2>
-
-            <a class="login-btn" routerLink="/login"> LOGIN </a>
-
-            <a class="register-btn" routerLink="/register"> REGISTER </a>
-                
-        </div>
+<section class="bg">
+  <div class="animation">
+    <div class="cloud-container">
+      <div class="cloud">
+        <img src="assets/cloudsvertical.png" alt="cloud" class="img_cloud">
+      </div>
     </div>
-</body>
-</html>
+
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+  </div>
+
+  <div class="alingment">
+    <div class="container">
+    <div class="card">
+      <img src="assets/API_logo.png" width="30%" class="logo">
+      <h1>API SEARCH </h1>
+    
+      <p>Monitoramento de vazamento de emails</p>
+
+      <button id="btn" class="primary" routerLink="/login">Login</button>
+      <button id="btn" class="secondary" routerLink="/register">Registrar</button>
+      <button class="tertiary"onclick="window.location.href='mailto:igor.luan.solutions@gmail.com?subject=Suporte%20-%20Problemas%20na%20Aplicação&body=Estou%20tendo%20problemas%20com%20a%20aplicação,%20poderia%20me%20ajudar%3F'">Contact Support</button>
+    </div>
+  </div>
+  </div>
+</section>
