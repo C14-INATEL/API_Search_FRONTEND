@@ -40,9 +40,9 @@ pipeline {
         stage('Test') {
             steps {
                 sh '''
-                export CHROME_BIN=/usr/bin/chromium
+                export CHROME_BIN=$(which chromium || which chromium-browser)
                 npm install
-                npx ng test --watch=false --code-coverage
+                npx ng test --watch=false --code-coverage --browsers=ChromeHeadless
                 '''
             }
         }
