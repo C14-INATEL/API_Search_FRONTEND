@@ -27,8 +27,12 @@ pipeline {
 
         stage('Package Version'){
             steps {
-                 sh '''
-                echo "PackAge version OK"
+                sh '''
+                echo "Packaging Angular dist"
+                cd dist
+                tar -czf $APP_NAME-$VERSION.tar.gz *
+                mkdir -p ../package
+                mv $APP_NAME-$VERSION.tar.gz ../package/
                 '''
             }
         }
@@ -36,10 +40,14 @@ pipeline {
         stage('Test') {
             steps {
                 sh '''
-                echo "teste OK"
+                export CHROME_BIN=/usr/bin/chromium-browser
+                export CHROME_FLAGS="--no-sandbox --disable-dev-shm-usage --disable-gpu"
+
+                npm ci
+                npx ng test --watch=false --code-coverage --browsers=ChromeHeadless
                 '''
             }
-        }
+    }
 
         stage('Deploy Staging') {
             when { expression { env.GIT_BRANCH == 'origin/staging' } }
