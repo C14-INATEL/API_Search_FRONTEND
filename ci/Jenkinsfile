@@ -50,11 +50,14 @@ pipeline {
         stage('Package') {
             steps {
                 sh '''
-                echo "Package OK"
+                echo "Packaging Angular dist"
 
                 mkdir -p package
 
-                echo "artifact test" > package/test.txt
+                tar -czf package/$APP_NAME-$VERSION.tar.gz \
+                -C dist/project_FrontEnd .
+
+                echo "Package created successfully"
                 '''
             }
         }
