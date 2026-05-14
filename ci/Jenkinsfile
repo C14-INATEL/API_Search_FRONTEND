@@ -5,12 +5,16 @@ pipeline {
         nodejs 'node'
     }
 
+    environment {
+        APP_NAME = "api-search-front"
+        VERSION = "1.0.${BUILD_NUMBER}"
+    }
 
     stages {
 
         stage('Checkout'){
             steps {
-                git branch: 'main', url: 'https://github.com'
+                git branch: 'main', url: 'https://github.com/C14-INATEL/API_Search_FRONTEND.git'
             }
         }
 
@@ -21,50 +25,39 @@ pipeline {
             }
         }
 
-
         stage('Package Version'){
             steps {
-                sh """
-            echo "Packaging Angular dist"
-            cd dist
-            tar -czf ${APP_NAME}-${VERSION}.tar.gz *
-            mkdir -p ../package
-            mv ${APP_NAME}-${VERSION}.tar.gz ../package/
-            """
+                sh '''
+                echo "Packaging Angular dist"
+                cd dist
+                tar -czf $APP_NAME-$VERSION.tar.gz *
+                mkdir -p ../package
+                mv $APP_NAME-$VERSION.tar.gz ../package/
+                '''
             }
         }
 
         stage('Deploy Staging') {
-            when {
-                expression {
-                    env.GIT_BRANCH == 'origin/staging'
-                }
-            }
+            when { expression { env.GIT_BRANCH == 'origin/staging' } }
             steps {
-                sh """
+                sh '''
                 echo "Deploy in staging"
                 mkdir -p staging
-                cp package/${APP_NAME}-${VERSION}.tar.gz staging/
-                """
+                cp package/$APP_NAME-$VERSION.tar.gz staging/
+                '''
             }
         }
 
         stage('Deploy Production') {
-            when {
-                expression {
-                    env.GIT_BRANCH == 'origin/main'
-                }
-            }
-                steps {
-                sh """
+            when { expression { env.GIT_BRANCH == 'origin/main' } }
+            steps {
+                sh '''
                 echo "Deploy in production"
                 mkdir -p prod
-                cp package/${APP_NAME}-${VERSION}.tar.gz prod/
-                """
+                cp package/$APP_NAME-$VERSION.tar.gz prod/
+                '''
             }
         }
-
-        // Log Stage Area
 
         stage('Init Audit Folder') {
             steps {
@@ -72,34 +65,30 @@ pipeline {
             }  
         }
 
-        // Log Build
-        stage('Build Production') {
+        stage('Build Production Log') {
             steps {
-                sh """
+                sh '''
                 echo "1️⃣ BUILD PRODUCTION" > audit/audit-log.txt
                 echo "--------------------------------" >> audit/audit-log.txt
                 npx ng build --configuration=production >> audit/audit-log.txt 2>&1
-                """
+                '''
             }
         }
 
-        // Log Tests
         stage('Run Tests') {
             steps {
-                sh """
+                sh '''
                 echo "" >> audit/audit-log.txt
                 echo "2️⃣ TESTES AUTOMATIZADOS" >> audit/audit-log.txt
                 echo "--------------------------------" >> audit/audit-log.txt
-        
-                 npx ng test --watch=false --browsers=ChromeHeadless >> audit/audit-log.txt 2>&1
-                """
+                npx ng test --watch=false --browsers=ChromeHeadless >> audit/audit-log.txt 2>&1
+                '''
             }
         }
 
-        // Log Alterations
         stage('Git Changes Log') {
             steps {
-                sh """
+                sh '''
                 echo "" >> audit/audit-log.txt
                 echo "3️⃣ ALTERAÇÕES NO CÓDIGO" >> audit/audit-log.txt
                 echo "--------------------------------" >> audit/audit-log.txt
@@ -108,52 +97,46 @@ pipeline {
                 echo "" >> audit/audit-log.txt
                 echo "Arquivos alterados:" >> audit/audit-log.txt
                 git diff --name-status HEAD~1 >> audit/audit-log.txt
-             """
+                '''
             }
         }
 
-        // Log Artfacts
         stage('Artifacts Log') {
             steps {
-            sh """
-            echo "" >> audit/audit-log.txt
-            echo "4️⃣ ARTEFATOS GERADOS" >> audit/audit-log.txt
-            echo "--------------------------------" >> audit/audit-log.txt
-        
-            ls -R dist >> audit/audit-log.txt
-            du -sh dist >> audit/audit-log.txt
-            """
+                sh '''
+                echo "" >> audit/audit-log.txt
+                echo "4️⃣ ARTEFATOS GERADOS" >> audit/audit-log.txt
+                echo "--------------------------------" >> audit/audit-log.txt
+                ls -R dist >> audit/audit-log.txt
+                du -sh dist >> audit/audit-log.txt
+                '''
             }
         }
 
-        // Log Pipeline
         stage('Pipeline Metadata') {
             steps {
-                sh """
+                sh '''
                 echo "" >> audit/audit-log.txt
                 echo "5️⃣ METADADOS DA PIPELINE" >> audit/audit-log.txt
                 echo "--------------------------------" >> audit/audit-log.txt
-        
-                echo "App: ${APP_NAME}" >> audit/audit-log.txt
-                echo "Version: ${VERSION}" >> audit/audit-log.txt
-                echo "Branch: ${env.GIT_BRANCH}" >> audit/audit-log.txt
-                echo "Build Number: ${env.BUILD_NUMBER}" >> audit/audit-log.txt
-                echo "Build URL: ${env.BUILD_URL}" >> audit/audit-log.txt
+                echo "App: $APP_NAME" >> audit/audit-log.txt
+                echo "Version: $VERSION" >> audit/audit-log.txt
+                echo "Branch: $GIT_BRANCH" >> audit/audit-log.txt
+                echo "Build Number: $BUILD_NUMBER" >> audit/audit-log.txt
+                echo "Build URL: $BUILD_URL" >> audit/audit-log.txt
                 echo "Date: $(date)" >> audit/audit-log.txt
-                """
+                '''
             }
         }
 
-        // Send Txt to Api
         stage('Send Audit Log To API') {
             steps {
-                sh """
-                LOG=$(cat audit/audit-log.txt | sed 's/\"/\\\\\"/g')
-
+                sh '''
+                LOG=$(cat audit/audit-log.txt | sed 's/"/\\"/g')
                 curl -X POST $DEPLOY_API_URL \
                 -H "Content-Type: application/json" \
-                -d "{\\"log\\":\\"$LOG\\", \\"version\\":\\"${VERSION}\\"}"
-                """
+                -d "{\\"log\\":\\"$LOG\\", \\"version\\":\\"$VERSION\\"}"
+                '''
             }
         }
 
@@ -165,22 +148,14 @@ pipeline {
                 subject: "🚀 Done Front Pipeline - ${JOB_NAME} #${BUILD_NUMBER}",
                 body: """
                 🚀 Done Front Pipeline!
-
                 🧪 Build: SUCCESS
                 🚀 Deploy: SUCCESS
-                🚨 Notify: SENT
-                🔬 Test: SUCESS
+                🔬 Test: SUCCESS
                 📃 Logs: STORED
-
                 📦 Project: ${JOB_NAME}
-                🌿 Branch: [${env.GIT_BRANCH}]
-                👤 ILSolutions
-
+                🌿 Branch: ${GIT_BRANCH}
                 🔢 Build Number: ${BUILD_NUMBER}
-                🖥️ Jenkins: ${JENKINS_URL}
-
-                🔗 Build URL:
-                ${BUILD_URL}
+                🔗 ${BUILD_URL}
                 """,
                 to: "igor.luan.solutions@gmail.com"
             )
@@ -191,16 +166,10 @@ pipeline {
                 subject: "❌ Failed Front Pipeline! - ${JOB_NAME} #${BUILD_NUMBER}",
                 body: """
                 ❌ Failed Pipeline!
-
                 📦 Project: ${JOB_NAME}
-                🌿 Branch: [${env.GIT_BRANCH}]
-                📄 Logs Status: [${LOG_STATUS}]
-                🔗 Build URL [${BUILD_URL}]
-
+                🌿 Branch: ${GIT_BRANCH}
                 🔢 Build Number: ${BUILD_NUMBER}
-
-                🔗 Check:
-                ${BUILD_URL}
+                🔗 ${BUILD_URL}
                 """,
                 to: "igor.luan.solutions@gmail.com"
             )
@@ -209,6 +178,7 @@ pipeline {
         always {
             junit 'coverage/**/junit.xml'
             archiveArtifacts 'package/*.tar.gz'
+            archiveArtifacts 'audit/audit-log.txt'
         }
     }
 }
