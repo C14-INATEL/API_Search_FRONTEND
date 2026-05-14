@@ -67,7 +67,13 @@ pipeline {
 
             steps {
                 sh '''
-                echo "Deploy Staging OK"
+                echo "Deploying to STAGING"
+
+                mkdir -p staging
+
+                cp package/$APP_NAME-$VERSION.tar.gz staging/
+
+                echo "Staging deploy OK"
                 '''
             }
         }
@@ -79,7 +85,13 @@ pipeline {
 
             steps {
                 sh '''
-                echo "Deploy Production OK"
+                echo "Deploying to PRODUCTION"
+
+                mkdir -p prod
+
+                cp package/$APP_NAME-$VERSION.tar.gz prod/
+
+                echo "Production deploy OK"
                 '''
             }
         }
