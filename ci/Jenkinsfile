@@ -99,15 +99,15 @@ pipeline {
         // Log Alterations
         stage('Git Changes Log') {
             steps {
-              sh """
-              echo "" >> audit/audit-log.txt
-             echo "3️⃣ ALTERAÇÕES NO CÓDIGO" >> audit/audit-log.txt
-             echo "--------------------------------" >> audit/audit-log.txt
-             echo "Último commit:" >> audit/audit-log.txt
+                sh """
+                echo "" >> audit/audit-log.txt
+                echo "3️⃣ ALTERAÇÕES NO CÓDIGO" >> audit/audit-log.txt
+                echo "--------------------------------" >> audit/audit-log.txt
+                echo "Último commit:" >> audit/audit-log.txt
                 git log -1 >> audit/audit-log.txt
-             echo "" >> audit/audit-log.txt
-              echo "Arquivos alterados:" >> audit/audit-log.txt
-              git diff --name-status HEAD~1 >> audit/audit-log.txt
+                echo "" >> audit/audit-log.txt
+                echo "Arquivos alterados:" >> audit/audit-log.txt
+                git diff --name-status HEAD~1 >> audit/audit-log.txt
              """
             }
         }
@@ -136,9 +136,9 @@ pipeline {
         
                 echo "App: ${APP_NAME}" >> audit/audit-log.txt
                 echo "Version: ${VERSION}" >> audit/audit-log.txt
-                echo "Branch: ${GIT_BRANCH}" >> audit/audit-log.txt
-                echo "Build Number: ${BUILD_NUMBER}" >> audit/audit-log.txt
-                echo "Build URL: ${BUILD_URL}" >> audit/audit-log.txt
+                echo "Branch: ${env.GIT_BRANCH}" >> audit/audit-log.txt
+                echo "Build Number: ${env.BUILD_NUMBER}" >> audit/audit-log.txt
+                echo "Build URL: ${env.BUILD_URL}" >> audit/audit-log.txt
                 echo "Date: $(date)" >> audit/audit-log.txt
                 """
             }
