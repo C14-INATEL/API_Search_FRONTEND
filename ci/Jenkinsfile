@@ -15,7 +15,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checkout OK'
-
                 git branch: 'main',
                 url: 'https://github.com/C14-INATEL/API_Search_FRONTEND.git'
             }
@@ -25,15 +24,11 @@ pipeline {
             steps {
                 sh '''
                 echo "Installing dependencies"
-
                 npm ci
 
                 echo "Dependencies OK"
-
                 echo "Running Angular build"
-
                 npx ng build --configuration production
-
                 echo "Angular build OK"
                 '''
             }
@@ -68,9 +63,7 @@ pipeline {
             steps {
                 sh '''
                 echo "Deploying to STAGING"
-
                 mkdir -p staging
-
                 cp package/$APP_NAME-$VERSION.tar.gz staging/
 
                 echo "Staging deploy OK"
@@ -86,9 +79,7 @@ pipeline {
             steps {
                 sh '''
                 echo "Deploying to PRODUCTION"
-
                 mkdir -p prod
-
                 cp package/$APP_NAME-$VERSION.tar.gz prod/
 
                 echo "Production deploy OK"
@@ -102,8 +93,11 @@ pipeline {
                 mkdir -p audit
 
                 echo "Pipeline OK" > audit/audit-log.txt
+
                 echo "App: $APP_NAME" >> audit/audit-log.txt
+
                 echo "Version: $VERSION" >> audit/audit-log.txt
+
                 echo "Build: $BUILD_NUMBER" >> audit/audit-log.txt
                 '''
             }
@@ -123,7 +117,6 @@ pipeline {
         always {
 
             archiveArtifacts artifacts: 'package/*', fingerprint: true
-
             archiveArtifacts artifacts: 'audit/*', fingerprint: true
 
             echo 'Artifacts archived'
