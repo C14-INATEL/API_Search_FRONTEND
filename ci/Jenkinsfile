@@ -40,8 +40,10 @@ pipeline {
         stage('Test') {
             steps {
                 sh '''
-                export CHROME_BIN=$(which chromium || which chromium-browser)
-                npm install
+                export CHROME_BIN=/usr/bin/chromium-browser
+                export CHROME_FLAGS="--no-sandbox --disable-dev-shm-usage --disable-gpu"
+
+                npm ci
                 npx ng test --watch=false --code-coverage --browsers=ChromeHeadless
                 '''
             }
