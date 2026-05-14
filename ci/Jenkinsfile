@@ -176,7 +176,6 @@ pipeline {
         }
 
         always {
-            junit 'coverage/**/junit.xml'
             archiveArtifacts 'package/*.tar.gz'
             archiveArtifacts 'audit/audit-log.txt'
         }
