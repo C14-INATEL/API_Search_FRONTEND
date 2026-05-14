@@ -24,9 +24,12 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                echo "Build OK"
+                echo "Installing dependencies"
+
+                npm ci
+
+                echo "NPM install OK"
                 '''
-                
             }
         }
 
