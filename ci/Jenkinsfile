@@ -51,9 +51,7 @@ pipeline {
             steps {
                 sh '''
                 echo "Packaging Angular dist"
-
                 mkdir -p package
-
                 tar -czf package/$APP_NAME-$VERSION.tar.gz \
                 -C dist/project_FrontEnd .
 
