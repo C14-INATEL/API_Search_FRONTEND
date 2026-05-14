@@ -28,7 +28,13 @@ pipeline {
 
                 npm ci
 
-                echo "NPM install OK"
+                echo "Dependencies OK"
+
+                echo "Running Angular build"
+
+                npx ng build --configuration production
+
+                echo "Angular build OK"
                 '''
             }
         }
