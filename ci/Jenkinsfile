@@ -40,14 +40,15 @@ pipeline {
         stage('Test') {
             steps {
                 sh '''
-                export CHROME_BIN=/usr/bin/chromium-browser
-                export CHROME_FLAGS="--no-sandbox --disable-dev-shm-usage --disable-gpu"
+                export CHROME_BIN=/usr/bin/google-chrome-stable
 
-                npm ci
-                npx ng test --watch=false --code-coverage --browsers=ChromeHeadless
+                npx ng test \
+                --watch=false \
+                --code-coverage \
+                --browsers=ChromeHeadlessCI
                 '''
             }
-    }
+        }
 
         stage('Deploy Staging') {
             when { expression { env.GIT_BRANCH == 'origin/staging' } }
