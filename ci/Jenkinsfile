@@ -37,6 +37,16 @@ pipeline {
             }
         }
 
+        stage('Test') {
+            steps {
+                sh '''
+                export CHROME_BIN=/usr/bin/chromium
+                npm install
+                npx ng test --watch=false --code-coverage
+                '''
+            }
+        }
+
         stage('Deploy Staging') {
             when { expression { env.GIT_BRANCH == 'origin/staging' } }
             steps {

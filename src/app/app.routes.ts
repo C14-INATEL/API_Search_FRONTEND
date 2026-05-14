@@ -1,10 +1,15 @@
 import { Routes } from '@angular/router';
-import { Login } from './pages/login/login';
-import { Register } from './pages/register/register';
-import { Home } from './pages/home/home';
 
 export const routes: Routes = [
-  { path: '', component: Home },
-  { path: 'login', component: Login},
-  { path: 'register', component: Register },
+
+  {path: '',loadComponent: () => import('./pages/home/home').then(m => m.Home)},
+
+  {path: 'login',loadComponent: () =>import('./pages/login/login').then(m => m.Login),
+    children: [{path: 'forgot-password',loadComponent: () =>import('./pages/forgot-password/forgot-password').then(m => m.ForgotPassword),
+    children: [{path: 'new-password',loadComponent: () =>import('./pages/new-password/new-password').then(m => m.NewPassword)}]}]
+  },
+  {path: 'register',loadComponent: () =>import('./pages/register/register').then(m => m.Register)},
+
+
+  {path: '**',redirectTo: ''}
 ];
