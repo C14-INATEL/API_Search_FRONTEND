@@ -35,6 +35,10 @@ pipeline {
         }
 
         stage('Test') {
+            steps{
+                apt-get update
+                apt-get install -y chromium
+            }
             steps {
                 sh '''
                 echo "Test OK"
@@ -98,7 +102,7 @@ pipeline {
 
                 echo "Version: $VERSION" >> audit/audit-log.txt
 
-                echo "Build: $BUILD_NUMBER" >> audit/audit-log.txt
+                echo "Build already executed in Build stage" >> audit/audit-log.txt
                 '''
             }
         }

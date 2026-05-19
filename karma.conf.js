@@ -1,7 +1,10 @@
+process.env.CHROME_BIN = '/usr/bin/google-chrome';
+
 module.exports = function (config) {
   config.set({
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
+
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
@@ -15,6 +18,7 @@ module.exports = function (config) {
 
     coverageReporter: {
       dir: require('path').join(__dirname, './coverage'),
+      subdir: '.',
       reporters: [
         { type: 'html' },
         { type: 'text-summary' }
@@ -31,14 +35,19 @@ module.exports = function (config) {
     restartOnFileChange: false,
 
     browsers: ['ChromeHeadlessCI'],
+    singleRun: true,
 
     customLaunchers: {
       ChromeHeadlessCI: {
         base: 'ChromeHeadless',
-        flags: ['--no-sandbox','--disable-dev-shm-usage','--disable-gpu','--disable-extensions']
+        flags: [
+          '--no-sandbox',
+          '--disable-gpu',
+          '--disable-dev-shm-usage',
+          '--disable-software-rasterizer',
+          '--remote-debugging-port=9222' // ⭐ importante em CI
+        ]
       }
-    },
-
-    singleRun: true
+    }
   });
 };
