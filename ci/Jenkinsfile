@@ -44,9 +44,7 @@ pipeline {
             '''
             }
 
-            post {
-                always {junit 'test-results/junit.xml'}
-            }
+            
         }
 
         stage('Package') {
