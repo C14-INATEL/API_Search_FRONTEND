@@ -36,8 +36,12 @@ pipeline {
 
         stage('Test') {
             steps{
-                apt-get update
-                apt-get install -y chromium
+                sh '''
+                export CHROME_BIN=/usr/bin/chromium-browser
+
+                npm install
+                npm run test -- --watch=false --browsers=ChromeHeadless
+                '''
             }
             steps {
                 sh '''
