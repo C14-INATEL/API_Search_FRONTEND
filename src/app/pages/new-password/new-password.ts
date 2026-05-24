@@ -1,10 +1,18 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-new-password',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [CommonModule, RouterLink],
   templateUrl: './new-password.html',
-  styleUrl: './new-password.css',
+  styleUrls: ['./new-password.css'],
 })
-export class NewPassword {}
+export class NewPassword {
+  mostrarSenha: boolean = false;
+
+  toggleSenha() {
+    this.mostrarSenha = !this.mostrarSenha;
+  }
+}
