@@ -1,1 +1,67 @@
-<p>Register Page!</p>
+<section class="bg">
+  <div class="animation">
+    <div class="cloud-container">
+      <div class="cloud">
+        <img src="assets/cloudsvertical.png" alt="cloud" class="img_cloud">
+      </div>
+    </div>
+
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+  </div>
+
+  <div class="alingment">
+    <div class="container">
+    <div class="card">
+      <img src="assets/API_logo.png" width="30%" class="logo">
+      <h1>API SEARCH</h1>
+    
+      <form>
+        <div class="input-group">
+        <label>Nome</label>
+        <input type="name"placeholder="Digite seu Nome"/>
+      </div>
+
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email"placeholder="Digite seu email"/>
+      </div>
+
+      <div class="input-group">
+        <label>Senha</label>
+        <input type="password" [type]="mostrarSenha ? 'text' : 'password'" placeholder="Digite sua Senha" autocomplete="current-password"/>
+
+          <div class="show-icon" *ngIf="mostrarSenha" (click)="toggleSenha()">
+            <span class="material-symbols-outlined">visibility</span>
+          </div>
+
+          <div class="hide-icon" *ngIf="!mostrarSenha" (click)="toggleSenha()">
+            <span class="material-symbols-outlined">visibility_off</span>
+          </div>
+      </div>
+
+      <div class="input-group">
+        <label>Confirme sua Senha</label>
+        <input type="confirmpassword" [type]="mostrarSenha ? 'text' : 'password'" placeholder="Digite sua Senha" autocomplete="current-password"/>
+
+          <div class="show-icon" *ngIf="mostrarSenha" (click)="toggleSenha()">
+            <span class="material-symbols-outlined">visibility</span>
+          </div>
+
+          <div class="hide-icon" *ngIf="!mostrarSenha" (click)="toggleSenha()">
+            <span class="material-symbols-outlined">visibility_off</span>
+          </div>
+      </div>
+    </form>
+
+    <button id="btn" class="login" routerLink="/">Entrar</button>
+    <p class="p2"> Já tem uma conta? </p>
+    <button class="go-register" routerLink="/login">Login</button>
+
+    </div>
+  </div>
+  </div>
+</section>
+
+    
