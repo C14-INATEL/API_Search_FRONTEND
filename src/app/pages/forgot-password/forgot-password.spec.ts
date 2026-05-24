@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute } from '@angular/router';
 import { ForgotPassword } from './forgot-password';
 
 describe('ForgotPassword', () => {
@@ -8,12 +9,8 @@ describe('ForgotPassword', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ForgotPassword],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(ForgotPassword);
-    component = fixture.componentInstance;
-    await fixture.whenStable();
+      imports: [ForgotPassword, RouterTestingModule],providers: [{ provide: ActivatedRoute,useValue: {snapshot: {},params: {},queryParams: {},}}]
+    }).compileComponents();fixture = TestBed.createComponent(ForgotPassword);component = fixture.componentInstance;fixture.detectChanges();
   });
 
   it('should create', () => {
