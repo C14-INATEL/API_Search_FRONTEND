@@ -12,6 +12,9 @@ export const routes: Routes = [
 
   {path: 'new-password',loadComponent: () =>import('./pages/new-password/new-password').then(m => m.NewPassword)},
 
+  {path: 'validate-token',loadComponent: () =>import('./pages/validate-token/validate-token').then(m => m.ValidateToken)},
+
+  {path: 'central-emails',loadComponent: () =>import('./pages/central-emails/central-emails').then(m => m.CentralEmails)},
 
   {path: '**',redirectTo: ''}
 ];
