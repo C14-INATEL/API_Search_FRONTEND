@@ -62,6 +62,7 @@ pipeline {
         stage('Deploy Staging') {
             when {
                 branch 'staging'
+                
             }
 
             steps {
