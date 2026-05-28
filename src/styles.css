@@ -1,3 +1,16 @@
 *{
     margin: 0px;
 }
+
+:root {
+  /* Background */
+  --background-card-central: rgba(23, 24, 28);
+  --semi-highlight: rgba(35, 36, 41);
+
+  /* Text */
+  --central-text: rgba(255,255,255,0.72);
+  --text-color: #ffffff;
+
+  /* Buttom */
+  --danger-color: #ef4444;
+}
