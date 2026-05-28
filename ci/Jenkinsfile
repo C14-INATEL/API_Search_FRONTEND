@@ -156,8 +156,7 @@ pipeline {
         }
 
         always {
-            junit '**/target/surefire-reports/TEST-*.xml'
-            archiveArtifacts 'target/*.jar'
+            archiveArtifacts 'package/*.tar.gz'
         }
     }
 }
