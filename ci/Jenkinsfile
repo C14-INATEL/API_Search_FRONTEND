@@ -115,9 +115,11 @@ pipeline {
                 subject: "🚀 Done Pipeline - ${JOB_NAME} #${BUILD_NUMBER}",
                 body: """
 
-                <div style="text-align:center;">
-                    <img src=" src/assets/PerfectDeploy.png ">
-                </div>
+            <html>
+                <body style="font-family: Arial;">
+                    <div style="text-align:center;"><img src=" src/assets/PerfectDeploy.png "></div>
+                </body>
+            </html>
 
                 🚀 Done Pipeline!
 
@@ -145,9 +147,11 @@ pipeline {
                 subject: "❌ Failed Pipeline ! - ${JOB_NAME} #${BUILD_NUMBER}",
                 body: """
 
-                <div style="text-align:center;">
-                    <img src=" src/assets/error.png ">
-                </div>
+                <html> 
+                <body style="font-family: Arial;">
+                    <div style="text-align:center;"><img src=" src/assets/error.png "></div>
+                </body>
+                </html>
 
                 ❌ Failed Pipeline!
 
