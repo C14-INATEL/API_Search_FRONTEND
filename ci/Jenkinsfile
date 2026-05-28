@@ -110,21 +110,62 @@ pipeline {
     }
 
     post {
-
         success {
-            echo 'PIPELINE SUCCESS'
+            emailext(
+                subject: "🚀 Done Pipeline - ${JOB_NAME} #${BUILD_NUMBER}",
+                body: """
+
+                <div style="text-align:center;">
+                    <img src=" src/assets/PerfectDeploy.png ">
+                </div>
+
+                🚀 Done Pipeline!
+
+                🧪 Build: SUCCESS
+                🚀 Deploy: SUCCESS
+                🚨 Notify: SENT
+
+                📦 Project: ${JOB_NAME}
+                🌿 Branch: [${env.GIT_BRANCH}]
+                👤 ILSolutions
+
+                🔢 Build Number: ${BUILD_NUMBER}
+                🖥️ Jenkins: ${JENKINS_URL}
+
+                🔗 Build URL:
+                ${BUILD_URL}
+
+                """,
+                to: "igor.luan.solutions@gmail.com"
+            )
         }
 
         failure {
-            echo 'PIPELINE FAILURE'
+            emailext(
+                subject: "❌ Failed Pipeline ! - ${JOB_NAME} #${BUILD_NUMBER}",
+                body: """
+
+                <div style="text-align:center;">
+                    <img src=" src/assets/error.png ">
+                </div>
+
+                ❌ Failed Pipeline!
+
+                📦 Project: ${JOB_NAME}
+                🌿 Branch: [${env.GIT_BRANCH}]
+
+                🔢 Build Number: ${BUILD_NUMBER}
+
+                🔗 Check:
+                ${BUILD_URL}
+                """,
+                to: "igor.luan.solutions@gmail.com"
+            )
         }
 
         always {
-
-            archiveArtifacts artifacts: 'package/*', fingerprint: true
-            archiveArtifacts artifacts: 'audit/*', fingerprint: true
-
-            echo 'Artifacts archived'
+            junit '**/target/surefire-reports/TEST-*.xml'
+            archiveArtifacts 'target/*.jar'
         }
     }
 }
