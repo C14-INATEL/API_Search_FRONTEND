@@ -17,6 +17,7 @@ pipeline {
                 echo 'Checkout OK'
                 git branch: 'main',
                 url: 'https://github.com/C14-INATEL/API_Search_FRONTEND.git'
+                script {env.LAST_COMMIT = sh(script: "git log -1 --pretty=%B",returnStdout: true).trim()}
             }
         }
 
@@ -117,6 +118,10 @@ pipeline {
 
                 🚀 Done Pipeline!
 
+                📝 Last Commit:
+                ${env.LAST_COMMIT}
+
+
                 🧪 Build: SUCCESS
                 🚀 Deploy: SUCCESS
                 🚨 Notify: SENT
@@ -142,6 +147,10 @@ pipeline {
                 body: """
 
                 ❌ Failed Pipeline!
+
+                📝 Last Commit:
+                ${env.LAST_COMMIT}
+
 
                 📦 Project: ${JOB_NAME}
                 🌿 Branch: [${env.GIT_BRANCH}]
