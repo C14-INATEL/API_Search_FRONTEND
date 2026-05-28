@@ -113,11 +113,7 @@ pipeline {
         success {
             emailext(
                 subject: "🚀 Done Pipeline - ${JOB_NAME} #${BUILD_NUMBER}",
-                mimeType: 'text/html',
-                attachmentsPattern: 'src/assets/PerfectDeploy.png',
                 body: """
-
-                <img src="cid:PerfectDeploy.png" width="120"><pre>
 
                 🚀 Done Pipeline!
 
@@ -143,11 +139,7 @@ pipeline {
         failure {
             emailext(
                 subject: "❌ Failed Pipeline ! - ${JOB_NAME} #${BUILD_NUMBER}",
-                mimeType: 'text/html',
-                attachmentsPattern: 'src/assets/error.png',
                 body: """
-
-                <img src="cid:error.png" width="120"><pre>
 
                 ❌ Failed Pipeline!
 
