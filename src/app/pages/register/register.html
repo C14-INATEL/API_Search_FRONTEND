@@ -20,18 +20,31 @@
       <form>
         <div class="input-group">
         <label>Nome</label>
-        <input type="name"placeholder="Digite seu Nome"/>
+        <input  
+                type="text"
+                placeholder="Digite seu Nome" 
+                [(ngModel)]="user.name"
+                name="name"/>
       </div>
 
       <div class="input-group">
         <label>Email</label>
-        <input type="email"placeholder="Digite seu email"/>
+        <input  
+                type="text"
+                placeholder="Digite seu email"
+                [(ngModel)]="user.email"
+                name="email"/>
       </div>
 
       <div class="input-group">
         <label>Senha</label>
-        <input type="password" [type]="mostrarSenha ? 'text' : 'password'" placeholder="Digite sua Senha" autocomplete="current-password"/>
-
+        <input 
+                [type]="mostrarSenha ? 'text' : 'password'" 
+                placeholder="Digite sua Senha"
+                autocomplete="current-password"
+                [(ngModel)]="user.password"
+                name="password"
+              />
           <div class="show-icon" *ngIf="mostrarSenha" (click)="toggleSenha()">
             <span class="material-symbols-outlined">visibility</span>
           </div>
@@ -55,7 +68,7 @@
       </div>
     </form>
 
-    <button id="btn" class="login" routerLink="/">Entrar</button>
+    <button id="btn" class="login" (click)="save()" routerLink="/">Entrar</button>
     <p class="p2"> Já tem uma conta? </p>
     <button class="go-register" routerLink="/login">Login</button>
 
