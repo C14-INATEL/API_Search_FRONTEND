@@ -129,7 +129,7 @@ app-root {
   transform: scale(1.04);
 }
 
-.tertiary {
+.support {
   position: relative;
   margin-top: 20px;
   border-radius: none;
@@ -141,7 +141,7 @@ app-root {
   z-index: 20;
 }
 
-.tertiary:hover {
+.support:hover {
   transform: scale(1.07);
 }
 
