@@ -12,14 +12,16 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                echo 'Checkout OK'
-                checkout scm,
-                url: 'https://github.com/C14-INATEL/API_Search_FRONTEND.git'
-                script {env.LAST_COMMIT = sh(script: "git log -1 --pretty=%B",returnStdout: true).trim()}
-            }
+    stage('Checkout') {
+        steps {
+            echo 'Checkout OK'
+            checkout([$class: 'GitSCM',
+                branches: [[name: env.BRANCH_NAME]],
+                userRemoteConfigs: [[url: 'https://github.com/C14-INATEL/API_Search_FRONTEND.git']]
+            ])
+            script {env.LAST_COMMIT = sh(script: "git log -1 --pretty=%B", returnStdout: true).trim()}
         }
+    }
 
         stage('Build') {
             steps {
