@@ -61,7 +61,7 @@ describe('Login', () => {
       expect(btn).not.toBeNull();
     });
 
-    it('Should own the field the button esqueci minha senha', () => {
+    it('Should own the field the button forget password', () => {
       const btn = fixture.debugElement.query(By.css('button.forgot_password'));
       expect(btn).not.toBeNull();
     });
