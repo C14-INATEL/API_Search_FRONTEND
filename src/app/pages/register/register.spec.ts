@@ -277,7 +277,7 @@ describe('Register', () => {
       expect(component.isLoading).toBeFalse();
     });
 
-    it('Should set isLoading to false after save error', () => {
+    it('Should set isLoading to false after save error ', () => {
       spyOn(userService, 'saveUser').and.returnValue(throwError(() => new Error('erro')));
       component.save();
       expect(component.isLoading).toBeFalse();
