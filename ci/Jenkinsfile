@@ -16,7 +16,7 @@ pipeline {
         steps {
             echo 'Checkout OK'
             checkout([$class: 'GitSCM',
-                branches: [[name: "*/${env.GIT_BRANCH ?: 'staging'}"]],
+                branches: [[name: 'staging']],
                 userRemoteConfigs: [[url: 'https://github.com/C14-INATEL/API_Search_FRONTEND.git']]
             ])
             script {env.LAST_COMMIT = sh(script: "git log -1 --pretty=%B", returnStdout: true).trim()}
