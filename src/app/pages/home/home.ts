@@ -11,5 +11,9 @@ import { RouterLink } from '@angular/router';
   styleUrl: './home.css'
 })
 export class Home {
+  contactSupport(): void {
+
+  window.location.href = 'mailto:igor.luan.solutions@gmail.com';
+}
 
 }

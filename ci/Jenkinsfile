@@ -17,6 +17,7 @@ pipeline {
                 echo 'Checkout OK'
                 git branch: 'main',
                 url: 'https://github.com/C14-INATEL/API_Search_FRONTEND.git'
+                script {env.LAST_COMMIT = sh(script: "git log -1 --pretty=%B",returnStdout: true).trim()}
             }
         }
 
@@ -62,6 +63,7 @@ pipeline {
         stage('Deploy Staging') {
             when {
                 branch 'staging'
+                
             }
 
             steps {
@@ -109,21 +111,61 @@ pipeline {
     }
 
     post {
-
         success {
-            echo 'PIPELINE SUCCESS'
+            emailext(
+                subject: "🚀 Done Pipeline - ${JOB_NAME} #${BUILD_NUMBER}",
+                body: """
+
+                🚀 Done Pipeline!
+
+                📝 Last Commit:
+                ${env.LAST_COMMIT}
+
+
+                🧪 Build: SUCCESS
+                🚀 Deploy: SUCCESS
+                🚨 Notify: SENT
+
+                📦 Project: ${JOB_NAME}
+                🌿 Branch: [${env.GIT_BRANCH}]
+                👤 ILSolutions
+
+                🔢 Build Number: ${BUILD_NUMBER}
+                🖥️ Jenkins: ${JENKINS_URL}
+
+                🔗 Build URL:
+                ${BUILD_URL}
+
+                """,
+                to: "igor.luan.solutions@gmail.com"
+            )
         }
 
         failure {
-            echo 'PIPELINE FAILURE'
+            emailext(
+                subject: "❌ Failed Pipeline ! - ${JOB_NAME} #${BUILD_NUMBER}",
+                body: """
+
+                ❌ Failed Pipeline!
+
+                📝 Last Commit:
+                ${env.LAST_COMMIT}
+
+
+                📦 Project: ${JOB_NAME}
+                🌿 Branch: [${env.GIT_BRANCH}]
+
+                🔢 Build Number: ${BUILD_NUMBER}
+
+                🔗 Check:
+                ${BUILD_URL}
+                """,
+                to: "igor.luan.solutions@gmail.com"
+            )
         }
 
         always {
-
-            archiveArtifacts artifacts: 'package/*', fingerprint: true
-            archiveArtifacts artifacts: 'audit/*', fingerprint: true
-
-            echo 'Artifacts archived'
+            archiveArtifacts 'package/*.tar.gz'
         }
     }
 }
