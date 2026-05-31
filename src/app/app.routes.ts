@@ -16,5 +16,7 @@ export const routes: Routes = [
 
   {path: 'central-emails',loadComponent: () =>import('./pages/central-emails/central-emails').then(m => m.CentralEmails)},
 
+  {path: 'alert',loadComponent: () =>import('./pages/alert/alert/alert').then(m => m.Alert)},
+
   {path: '**',redirectTo: ''}
 ];
