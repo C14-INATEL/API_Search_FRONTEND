@@ -8,6 +8,7 @@ pipeline {
     environment {
         APP_NAME = "api-search-front"
         VERSION = "1.0.${BUILD_NUMBER}"
+        BRANCH = "staging" 
     }
 
     stages {
@@ -64,8 +65,7 @@ pipeline {
 
         stage('Deploy Staging') {
             when {
-                branch 'staging'
-                
+                expression { env.BRANCH == 'staging' }
             }
 
             steps {
@@ -81,7 +81,7 @@ pipeline {
 
         stage('Deploy Production') {
             when {
-                branch 'main'
+                expression { env.BRANCH == 'main' }
             }
 
             steps {
