@@ -4,6 +4,7 @@ import { Register } from './register';
 import { of, throwError } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { UserService } from '../../core/UserService/userService';
+import { RouterLink } from '@angular/router';
 
 // mock success answer
 class UserServiceMock {
@@ -289,9 +290,10 @@ describe('Register', () => {
   describe('Navigation (routerLink)', () => {
 
     it('Button Entrar should have routerLink="/login"', () => {
-      const btn = fixture.debugElement.query(By.css('button.go-register'));
-      expect(btn.nativeElement.getAttribute('ng-reflect-router-link')).toBe('/login');
-    });
+    const btn = fixture.debugElement.query(By.css('button.go-register'));
+    const routerLink = btn.injector.get(RouterLink);
+    expect(routerLink.routerLink).toBe('/login');
+});
 
   });
 

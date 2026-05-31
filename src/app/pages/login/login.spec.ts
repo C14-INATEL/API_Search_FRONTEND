@@ -34,7 +34,7 @@ describe('Login', () => {
   });
 
   // testing html 
-    describe('Estrutura do template', () => {
+  describe('Estrutura do template', () => {
 
     it('should show title "API SEARCH"', () => {
       const h1 = fixture.debugElement.query(By.css('h1'));
@@ -147,25 +147,24 @@ describe('Login', () => {
 
   });
 
-    describe('Navigation (routerLink)', () => {
+  // navigation with router
+  describe('Navigation (routerLink)', () => {
 
     it('The button "Entrar" should have routerLink="/login"', () => {
       const btn = fixture.debugElement.query(By.css('button.login'));
-      expect(btn.nativeElement.getAttribute('ng-reflect-router-link')).toBe('/login');
+      expect(btn.attributes['routerLink']).toBe('/login');
     });
 
     it('The button "registrar-se" should have routerLink="/register"', () => {
       const btn = fixture.debugElement.query(By.css('button.go-register'));
-      expect(btn.nativeElement.getAttribute('ng-reflect-router-link')).toBe('/register');
+      expect(btn.attributes['routerLink']).toBe('/register');
     });
 
     it('The button "senha" should have routerLink="/forgot-password"', () => {
       const btn = fixture.debugElement.query(By.css('button.forgot_password'));
-      expect(btn.nativeElement.getAttribute('ng-reflect-router-link')).toBe('/forgot-password');
+      expect(btn.attributes['routerLink']).toBe('/forgot-password');
     });
 
   });
 
 });
-
-

@@ -51,6 +51,7 @@ export class Register {
       },
       error: (error) => {
         this.isLoading = false;
+        console.error('Error saving user:', error.message);
         this.alertTitle = 'Erro';
         this.alertMessage = 'Não foi possível cadastrar. Tente novamente.';
         this.alertType = 'error'; 
