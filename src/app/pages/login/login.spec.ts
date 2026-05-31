@@ -21,7 +21,7 @@ describe('Login', () => {
   });
 
   // test of creating component and verify if the component is init with correct value, in this this case password hide password
-  describe('Creating component', () => {
+  describe('Creating component ', () => {
 
   it('should creating with success', () => {
     expect(component).toBeTruthy();
