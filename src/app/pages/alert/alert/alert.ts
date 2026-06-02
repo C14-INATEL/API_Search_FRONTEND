@@ -17,7 +17,7 @@ export class Alert {
   switch(this.type) {
     case 'success': return 'assets/Pass.png';
     case 'error':   return 'assets/error.png';
-    case 'warning': return 'assets/PerfectDeploy.png';
+    case 'warning': return 'assets/atention.png';
     default:        return 'assets/Pass.png';
   }
 }
