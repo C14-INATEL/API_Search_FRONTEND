@@ -17,68 +17,54 @@
       <img src="assets/API_logo.png" width="30%" class="logo">
       <h1>API SEARCH</h1>
     
-      <form>
+      <form [formGroup]="registerForm">
+        
         <div class="input-group">
-        <label>Nome</label>
-        <input  
-                type="text"
-                placeholder="Digite seu Nome" 
-                [(ngModel)]="user.name"
-                name="name"/>
-      </div>
+          <label>Nome</label>
+          <input type="text" placeholder="Digite seu Nome" formControlName="name" />
+        </div>
 
-      <div class="input-group">
-        <label>Email</label>
-        <input  
-                type="text"
-                placeholder="Digite seu email"
-                [(ngModel)]="user.email"
-                name="email"/>
-      </div>
+        <div class="input-group">
+          <label>Email</label>
+          <input type="text" placeholder="Digite seu email" formControlName="email" />
+        </div>
 
-      <div class="input-group">
-        <label>Senha</label>
-        <input 
-                [type]="mostrarSenha ? 'text' : 'password'" 
-                placeholder="Digite sua Senha"
-                autocomplete="current-password"
-                [(ngModel)]="user.password"
-                name="password"
-              />
+        <div class="input-group">
+          <label>Senha</label>
+          <input [type]="mostrarSenha ? 'text' : 'password'" placeholder="Digite sua Senha" autocomplete="new-password" formControlName="password" />
           <div class="show-icon" *ngIf="mostrarSenha" (click)="toggleSenha()">
             <span class="material-symbols-outlined">visibility</span>
           </div>
-
           <div class="hide-icon" *ngIf="!mostrarSenha" (click)="toggleSenha()">
             <span class="material-symbols-outlined">visibility_off</span>
           </div>
-      </div>
+        </div>
 
-      <div class="input-group">
-        <label>Confirme sua Senha</label>
-        <input type="confirmpassword" 
-              [type]="mostrarSenha ? 'text' : 'password'" 
-              placeholder="Confirme sua Senha" 
-              autocomplete="current-password"/>
+        <div class="input-group">
+          <label>Confirme sua Senha</label>
+          <input [type]="mostrarSenha ? 'text' : 'password'" placeholder="Confirme sua Senha" autocomplete="new-password" formControlName="confirmPassword" />
           <div class="show-icon" *ngIf="mostrarSenha" (click)="toggleSenha()">
             <span class="material-symbols-outlined">visibility</span>
           </div>
-
           <div class="hide-icon" *ngIf="!mostrarSenha" (click)="toggleSenha()">
             <span class="material-symbols-outlined">visibility_off</span>
           </div>
-      </div>
-    </form>
-    <button type="button" id="btn" class="login" (click)="save()" [disabled]="isLoading">
-      <span *ngIf="!isLoading">Registrar</span>
-      <span *ngIf="isLoading" class="spinner"></span>
-    </button>
-    <p class="p2"> Já tem uma conta? </p>
-    <button class="go-register" routerLink="/login">Entrar</button>
+        </div>
+
+      </form>
+      
+      <button type="button" id="btn" class="login" (click)="save()" [disabled]="isLoading">
+        <span *ngIf="!isLoading">Registrar</span>
+        <span *ngIf="isLoading" class="spinner"></span>
+      </button>
+      
+      <p class="p2"> Já tem uma conta? </p>
+      <button class="go-register" routerLink="/login">Entrar</button>
     </div>
   </div>
   </div>
 </section>
+
 <app-alert
   *ngIf="showAlert"
   [type]="alertType"
@@ -86,4 +72,3 @@
   [title]="alertTitle"
   (closed)="onAlertClose()">
 </app-alert>
-    

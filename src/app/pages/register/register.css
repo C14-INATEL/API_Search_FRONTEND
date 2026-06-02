@@ -34,7 +34,7 @@ app-root {
   justify-content: center;
 }
 
-/* =====================spinner=======================*/
+/* ===================== spinner =======================*/
 .spinner {
   display: inline-block;
   width: 20px;
@@ -156,6 +156,13 @@ input {
   color: #64748b;
 }
 
+.error-msg {
+  color: #ff4d4d;
+  font-size: 0.8rem;
+  margin-top: 4px;
+  display: block;
+}
+
 /* ================= Icones ================= */
 
 .material-symbols-outlined {
@@ -213,6 +220,9 @@ input {
   box-shadow:0 0 30px rgba(56,189,248,0.7),0 0 60px rgba(56,189,248,0.4);
 }
 
+#btn.login:active {
+  transform: scale(0.95);
+}
 .p2{
   position: relative;
   display: inline;
