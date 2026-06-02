@@ -165,95 +165,109 @@ describe('Register', () => {
   // verify if that the user typed arrive in registerForm
   describe('Reactive Form Binding', () => {
 
-  it('Should update name control', () => {
-    const input = fixture.debugElement
-      .query(By.css('input[placeholder="Digite seu Nome"]'))
-      .nativeElement;
+    it('Should update name control', () => {
+      const input = fixture.debugElement
+        .query(By.css('input[placeholder="Digite seu Nome"]'))
+        .nativeElement;
 
-    input.value = 'João Silva';
-    input.dispatchEvent(new Event('input'));
+      input.value = 'João Silva';
+      input.dispatchEvent(new Event('input'));
 
-    fixture.detectChanges();
+      fixture.detectChanges();
 
-    expect(
-      component.registerForm.get('name')?.value
-    ).toBe('João Silva');
+      expect(
+        component.registerForm.get('name')?.value
+      ).toBe('João Silva');
+    });
+
+    it('Should update email control', () => {
+      const input = fixture.debugElement
+        .query(By.css('input[placeholder="Digite seu email"]'))
+        .nativeElement;
+
+      input.value = 'joao@email.com';
+      input.dispatchEvent(new Event('input'));
+
+      fixture.detectChanges();
+
+      expect(
+        component.registerForm.get('email')?.value
+      ).toBe('joao@email.com');
+    });
+
+    it('Should update password control', () => {
+      const input = fixture.debugElement
+        .query(By.css('input[placeholder="Digite sua Senha"]'))
+        .nativeElement;
+
+      input.value = 'Senha@123456';
+      input.dispatchEvent(new Event('input'));
+
+      fixture.detectChanges();
+
+      expect(
+        component.registerForm.get('password')?.value
+      ).toBe('Senha@123456');
+    });
+
   });
 
-  it('Should update email control', () => {
-    const input = fixture.debugElement
-      .query(By.css('input[placeholder="Digite seu email"]'))
-      .nativeElement;
-
-    input.value = 'joao@email.com';
-    input.dispatchEvent(new Event('input'));
-
-    fixture.detectChanges();
-
-    expect(
-      component.registerForm.get('email')?.value
-    ).toBe('joao@email.com');
-  });
-
-  it('Should update password control', () => {
-    const input = fixture.debugElement
-      .query(By.css('input[placeholder="Digite sua Senha"]'))
-      .nativeElement;
-
-    input.value = 'Senha@123456';
-    input.dispatchEvent(new Event('input'));
-
-    fixture.detectChanges();
-
-    expect(
-      component.registerForm.get('password')?.value
-    ).toBe('Senha@123456');
-  });
-
-});
-
-  // testing user service
+  /// testing user service
   describe('save()', () => {
 
+    // Função auxiliar para preencher o formulário com dados válidos
+    const fillValidForm = () => {
+      component.registerForm.patchValue({
+        name: 'Joao Silva', // Sem acento para evitar bloqueio de Regex
+        email: 'joao@email.com',
+        password: 'Senha@123456', 
+        confirmPassword: 'Senha@123456'
+      });
+    };
+
     it('Should call userService.saveUser with form data', () => {
+      spyOn(userService, 'saveUser').and.callThrough();
 
-  spyOn(userService, 'saveUser').and.callThrough();
+      fillValidForm();
+      component.save();
 
-  component.registerForm.patchValue({
-    name: 'João Silva',
-    email: 'joao@email.com',
-    password: 'Senha@123456',
-    confirmPassword: 'Senha@123456'
-  });
-
-  component.save();
-
-  expect(userService.saveUser).toHaveBeenCalledWith({
-    name: 'João Silva',
-    email: 'joao@email.com',
-    password: 'Senha@123456'
-  });
-});
+      expect(userService.saveUser).toHaveBeenCalledWith({
+        name: 'Joao Silva',
+        email: 'joao@email.com',
+        password: 'Senha@123456'
+      });
+    });
 
     it('Should show alert with type success when save with success', () => {
       spyOn(userService, 'saveUser').and.returnValue(of({ id: 1 }));
+
+      fillValidForm();
       component.save();
+
       expect(component.showAlert).toBeTrue();
       expect(component.alertType).toBe('success');
     });
 
     it('Should show alert with type error when save fails', () => {
       spyOn(userService, 'saveUser').and.returnValue(throwError(() => new Error('erro')));
+      
+      fillValidForm();
       component.save();
+      
       expect(component.showAlert).toBeTrue();
       expect(component.alertType).toBe('error');
     });
 
     it('Should handle with error when save user', () => {
       const erro = new Error('Erro de rede');
+
+      // Fica espionando o saveUser para retornar o erro
       spyOn(userService, 'saveUser').and.returnValue(throwError(() => erro));
       spyOn(console, 'error');
+
+      fillValidForm();
       component.save();
+
       expect(console.error).toHaveBeenCalledWith('Error saving user:', erro.message);
     });
 
