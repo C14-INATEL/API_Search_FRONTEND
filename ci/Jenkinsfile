@@ -152,7 +152,6 @@ pipeline {
                 📝 Last Commit:
                 ${env.LAST_COMMIT}
 
-
                 📦 Project: ${JOB_NAME}
                 🌿 Branch: [${env.GIT_BRANCH}]
 
