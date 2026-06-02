@@ -8,21 +8,20 @@ pipeline {
     environment {
         APP_NAME = "api-search-front"
         VERSION = "1.0.${BUILD_NUMBER}"
-        BRANCH = "staging" 
     }
 
     stages {
 
     stage('Checkout') {
-        steps {
-            echo 'Checkout OK'
-            checkout([$class: 'GitSCM',
-                branches: [[name: 'staging']],
-                userRemoteConfigs: [[url: 'https://github.com/C14-INATEL/API_Search_FRONTEND.git']]
-            ])
-            script {env.LAST_COMMIT = sh(script: "git log -1 --pretty=%B", returnStdout: true).trim()}
+    steps {
+        checkout scm  
+        script {
+            env.LAST_COMMIT = sh(script: "git log -1 --pretty=%B", returnStdout: true).trim()
+            env.BRANCH = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
+            echo "Branch: ${env.BRANCH}"
         }
     }
+}
 
         stage('Build') {
             steps {
