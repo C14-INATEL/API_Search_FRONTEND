@@ -1,0 +1,12 @@
+<div class="alert-overlay">
+  <div class="alert-card">
+    <img [src]="getIcon()" class="logo">
+    <p class="alert-title"  [class.success]="type === 'success'" 
+                            [class.error]="type === 'error'" 
+                            [class.warning]="type === 'warning'">
+    {{ title }}
+    </p>
+    <p class="alert-message">{{ message }}</p>
+    <button class="alert-btn" (click)="close()">{{ btnLabel }}</button>
+  </div>
+</div>

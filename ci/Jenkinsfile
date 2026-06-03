@@ -12,14 +12,16 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                echo 'Checkout OK'
-                git branch: 'main',
-                url: 'https://github.com/C14-INATEL/API_Search_FRONTEND.git'
-                script {env.LAST_COMMIT = sh(script: "git log -1 --pretty=%B",returnStdout: true).trim()}
-            }
+    stage('Checkout') {
+    steps {
+        checkout scm  
+        script {
+            env.LAST_COMMIT = sh(script: "git log -1 --pretty=%B", returnStdout: true).trim()
+            env.BRANCH = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
+            echo "Branch: ${env.BRANCH}"
         }
+    }
+}
 
         stage('Build') {
             steps {
@@ -62,8 +64,7 @@ pipeline {
 
         stage('Deploy Staging') {
             when {
-                branch 'staging'
-                
+                expression { env.BRANCH == 'staging' }
             }
 
             steps {
@@ -79,7 +80,7 @@ pipeline {
 
         stage('Deploy Production') {
             when {
-                branch 'main'
+                expression { env.BRANCH == 'main' }
             }
 
             steps {
@@ -150,7 +151,6 @@ pipeline {
 
                 📝 Last Commit:
                 ${env.LAST_COMMIT}
-
 
                 📦 Project: ${JOB_NAME}
                 🌿 Branch: [${env.GIT_BRANCH}]

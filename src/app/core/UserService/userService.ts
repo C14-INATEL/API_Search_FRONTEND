@@ -11,6 +11,10 @@ export class UserService {
   constructor(private httpclient: HttpClient){  
   }
 
+  login(email: string, password: string): Observable<number> {
+  return this.httpclient.get<number>(`${API_PATH}/users/login/${email}/${password}`);
+
+  }
   errorMessage: string = '';
 
   saveUser(user: userInterface): Observable<userInterface> {
@@ -18,8 +22,9 @@ export class UserService {
       .post<userInterface>(`${API_PATH}/users/save`, user)
       .pipe(
         catchError(this.errorHandler)
-      )
+      );
   }
+
   private errorHandler(error: HttpErrorResponse) {
 
     let message = '';
@@ -29,7 +34,7 @@ export class UserService {
     } else {
       message = `Error ${error.status}: ${error.error?.message || error.message || 'Server error'}`;
     }
-
+    
     return throwError(() => new Error(message));
   }
 }

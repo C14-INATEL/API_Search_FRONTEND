@@ -19,6 +19,121 @@ app-root {
   overflow: hidden;
 }
 
+/*-------------------------------------------------------------------*/
+.alert-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(9, 10, 15, 0.6);
+  backdrop-filter: blur(3px);
+  animation: fadeIn 0.3s ease;
+}
+
+.alert-card {
+  position: relative;
+  width: 320px;
+  border-radius: 22px;
+  padding: 32px 28px;
+  text-align: center;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  border: 1px solid rgba(56, 189, 248, 0);
+  box-shadow: 0 0 0px rgba(56,189,248,0);
+  transition: border-color 0.6s ease, box-shadow 0.6s ease;
+  animation: slideUp 0.4s ease forwards;
+  overflow: hidden;
+}
+
+.alert-card:hover {
+  border-color: rgba(56, 189, 248, 0.9);
+  box-shadow:
+    0 0 15px rgba(56,189,248,0.9),
+    0 0 40px rgba(56,189,248,0.5),
+    0 0 80px rgba(56,189,248,0.2),
+    inset 0 0 12px rgba(56,189,248,0.1);
+}
+
+.alert-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  background: linear-gradient(120deg, transparent, rgba(56,189,248,0.15), transparent);
+  opacity: 0;
+  transition: 0.6s;
+  pointer-events: none;
+}
+
+.alert-card:hover::before {
+  opacity: 1;
+}
+
+.alert-card .alert-title {
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  opacity: 0.7;
+}
+
+.alert-card .alert-title.success {
+  color: #4ade80;
+}
+
+.alert-card .alert-title.error {
+  color: #ff5a5a;
+}
+
+.alert-card .alert-title.warning {
+  color: #38bdf8;
+}
+
+.alert-card .alert-message {
+  font-size: 15px;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  mix-blend-mode: screen;
+}
+
+.alert-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 14px;
+  border: none;
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #3b82f6, #06b6d4);
+  color: white;
+  box-shadow: 0 0 20px rgba(56,189,248,0.4);
+  transition: 0.35s;
+}
+
+.alert-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(56,189,248,0.7);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+/*-------------------------------------------------------------------*/
+
 .bg {
   position: fixed;
   inset: 0;
@@ -34,20 +149,7 @@ app-root {
   justify-content: center;
 }
 
-/* ===================== spinner =======================*/
-.spinner {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 3px solid rgba(255,255,255,0.3);
-  border-top-color: #fff;
-  border-radius: 50%;
-  animation: spin 0.7s linear infinite;
-}
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
 /* ================= Container Card ================= */
 
 .container {
@@ -63,7 +165,7 @@ app-root {
   position: relative;
   width: 90%;
   max-width: 400px;
-  max-height: 760px;
+  max-height: 600px;
   border-radius: 22px;
   padding: 40px 30px;
   text-align: center;
@@ -102,66 +204,6 @@ app-root {
   font-size: 15px;
 }
 
-/* ================= Form ================= */
-
-label {
-  position: relative;
-  letter-spacing: 1px;
-  font-size: 20px;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 22px;
-}
-
-input {
-  width: 350px;
-}
-
-.input-group {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  z-index: 20;
-}
-
-.input-group label {
-  color: #cbd5e1;
-  font-size: 14px;
-}
-
-.input-group input {
-  height: 52px;
-  padding-left: 25px;
-  padding-right: 29px;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.03);
-  color: white;
-  font-size: 15px;
-  outline: none;
-  transition: 0.3s ease;
-}
-
-.input-group input:focus {
-  border-color: #38bdf8;
-  box-shadow: 0 0 18px rgba(56, 189, 248, 0.3);
-}
-
-.input-group input::placeholder {
-  color: #64748b;
-}
-
-.error-msg {
-  color: #ff4d4d;
-  font-size: 0.8rem;
-  margin-top: 4px;
-  display: block;
-}
 
 /* ================= Icones ================= */
 
@@ -212,6 +254,7 @@ input {
   background: linear-gradient(135deg, #3b82f6, #06b6d4);
   color: white;
   margin-top: 30px;
+
   box-shadow:0 0 20px rgba(56,189,248,0.4);
 }
 
@@ -220,19 +263,16 @@ input {
   box-shadow:0 0 30px rgba(56,189,248,0.7),0 0 60px rgba(56,189,248,0.4);
 }
 
-#btn.login:active {
-  transform: scale(0.95);
-}
 .p2{
   position: relative;
   display: inline;
   pointer-events: none;
 }
 
-.go-register {
+.go-register, .forgot_password{
   position: relative;
   display: inline;
-  margin-top: 20px;
+  margin-top: 30px;
   border-radius: none;
   background: none;
   border: none;
@@ -242,8 +282,12 @@ input {
   z-index: 20;
 }
 
-.go-register:hover {
-  transform: scale(1.07);
+.forgot_password {
+  margin-top: 25px;
+}
+
+.go-register:hover, .forgot_password:hover {
+  transform: scale(1.05);
 }
 
 /* ================= Animação de entrada ================= */

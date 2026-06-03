@@ -5,7 +5,6 @@
         <img src="assets/cloudsvertical.png" alt="cloud" class="img_cloud">
       </div>
     </div>
-
     <div id="stars"></div>
     <div id="stars2"></div>
     <div id="stars3"></div>
@@ -13,37 +12,56 @@
 
   <div class="alingment">
     <div class="container">
-    <div class="card">
-      <img src="assets/API_logo.png" width="30%" class="logo">
-      <h1>API SEARCH</h1>
-    
-      <form>
-      <div class="input-group">
-        <label>Email</label>
-        <input type="email"placeholder="Digite seu email"/>
-      </div>
+      <div class="card">
+        <img src="assets/API_logo.png" width="30%" class="logo">
+        <h1>API SEARCH</h1>
 
-      <div class="input-group">
-        <label>Senha</label>
-        <input type="password" [type]="mostrarSenha ? 'text' : 'password'" placeholder="Digite sua Senha" autocomplete="current-password"/>
-
-          <div class="show-icon" *ngIf="mostrarSenha" (click)="toggleSenha()">
-            <span class="material-symbols-outlined">visibility</span>
+        <form>
+          <div class="input-group">
+            <label>Email</label>
+            <input type="email"
+                   placeholder="Digite seu email"
+                   [(ngModel)]="credentials.email"
+                   name="email"/>
           </div>
 
-          <div class="hide-icon" *ngIf="!mostrarSenha" (click)="toggleSenha()">
-            <span class="material-symbols-outlined">visibility_off</span>
+          <div class="input-group">
+            <label>Senha</label>
+            <input [type]="mostrarSenha ? 'text' : 'password'"
+                   placeholder="Digite sua Senha"
+                   autocomplete="current-password"
+                   [(ngModel)]="credentials.password"
+                   name="password"
+                   (keyup.enter)="login()"/>
+
+            <div class="show-icon" *ngIf="mostrarSenha" (click)="toggleSenha()">
+              <span class="material-symbols-outlined">visibility</span>
+            </div>
+            <div class="hide-icon" *ngIf="!mostrarSenha" (click)="toggleSenha()">
+              <span class="material-symbols-outlined">visibility_off</span>
+            </div>
           </div>
-      </div>
-    </form>
+        </form>
 
-    <button id="btn" class="login" routerLink="/login">Entrar</button>
-    <p class="p2"> Ainda não tem uma conta?</p>
-    <button class="go-register" routerLink="/register">registrar-se</button>
+        <button type="button" id="btn" class="login" (click)="login()" [disabled]="isLoading">
+          <span *ngIf="!isLoading">Entrar</span>
+          <span *ngIf="isLoading" class="spinner"></span>
+        </button>
 
-    <p class="p2"> Esqueci minha </p>
-    <button class="forgot_password" routerLink="/forgot-password">senha</button>
+        <p class="p2">Ainda não tem uma conta? </p>
+        <button class="go-register" routerLink="/register"> Registrar-se</button>
+        <br>
+        <p class="p2"></p>
+        <button class="forgot_password" routerLink="/forgot-password">Esqueci minha senha</button>
+      </div>  
     </div>
   </div>
-  </div>
 </section>
+
+<app-alert
+  *ngIf="showAlert"
+  [type]="alertType"
+  [message]="alertMessage"
+  [title]="alertTitle"
+  (closed)="onAlertClose()">
+</app-alert>
