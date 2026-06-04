@@ -85,7 +85,7 @@ pipeline {
                         npx vercel dist-deploy \
                             --token $TOKEN_VERCEL_JENKINS \
                             --yes \
-                            --staging
+                            --prod
 
                         echo "Staging deploy OK"
                         '''
