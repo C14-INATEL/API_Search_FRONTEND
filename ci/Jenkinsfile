@@ -173,7 +173,7 @@ pipeline {
                 subject: "❌ Failed Pipeline ! - ${JOB_NAME} #${BUILD_NUMBER}",
                 body: """
 
-                ❌ Failed Pipeline!
+                ❌ Failed Pipeline !
 
                 📝 Last Commit:
                 ${env.LAST_COMMIT}
