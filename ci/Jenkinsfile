@@ -41,7 +41,6 @@ pipeline {
             steps {
             sh '''
             export CHROME_BIN=/usr/bin/google-chrome
-
             npm run test -- --watch=false --browsers=ChromeHeadless
             '''
             }
@@ -56,7 +55,6 @@ pipeline {
                 mkdir -p package
                 tar -czf package/$APP_NAME-$VERSION.tar.gz \
                 -C dist/project_FrontEnd .
-
                 echo "Package created successfully"
                 '''
             }
@@ -66,30 +64,27 @@ pipeline {
             when {
                 expression { env.BRANCH == 'staging' }
             }
-
             steps {
                 withCredentials([
-                    string(credentialsId: 'TOKEN_VERCEL_JENKINS', variable: 'TOKEN_VERCEL_JENKINS'),
-                    string(credentialsId: 'VERCEL_ORG_ID', variable: 'VERCEL_ORG_ID'),
-                    string(credentialsId: 'VERCEL_PROJECT_ID', variable: 'VERCEL_PROJECT_ID')
-                    ]) {
-                        sh '''
-                        echo "Deploying to STAGING"
-                        mkdir -p staging
-                        cp package/$APP_NAME-$VERSION.tar.gz staging/
+                    string(credentialsId: 'TOKEN_VERCEL_JENKINS', variable: 'TOKEN'),
+                    string(credentialsId: 'VERCEL_ORG_ID', variable: 'ORG_ID'),
+                    string(credentialsId: 'VERCEL_ORG_ID_APISEARCH_STAGING', variable: 'PROJECT_ID')
+                ]) {
+                    sh '''
+                    echo "Deploying to STAGING"
+                    rm -rf dist-staging && mkdir -p dist-staging
+                    tar -xzf package/$APP_NAME-$VERSION.tar.gz -C dist-staging
 
-                        echo "Deploying to Vercel"
-                        mkdir -p dist-deploy
-                        tar -xzf package/$APP_NAME-$VERSION.tar.gz -C dist-deploy
+                    VERCEL_ORG_ID=$ORG_ID \
+                    VERCEL_PROJECT_ID=$PROJECT_ID \
+                    npx vercel dist-staging \
+                        --token $TOKEN \
+                        --yes \
+                        --prod
 
-                        npx vercel dist-deploy \
-                            --token $TOKEN_VERCEL_JENKINS \
-                            --yes \
-                            --prod
-
-                        echo "Staging deploy OK"
-                        '''
-                    }
+                    echo "Staging deploy OK"
+                    '''
+                }
             }
         }
 
@@ -99,27 +94,25 @@ pipeline {
             }
             steps {
                 withCredentials([
-                    string(credentialsId: 'TOKEN_VERCEL_JENKINS', variable: 'TOKEN_VERCEL_JENKINS'),
-                    string(credentialsId: 'VERCEL_ORG_ID', variable: 'VERCEL_ORG_ID'),
-                    string(credentialsId: 'VERCEL_PROJECT_ID', variable: 'VERCEL_PROJECT_ID')
-                    ]) {
-                        sh '''
-                        echo "Deploying to PRODUCTION"
-                        mkdir -p prod
-                        cp package/$APP_NAME-$VERSION.tar.gz prod/
+                    string(credentialsId: 'TOKEN_VERCEL_JENKINS', variable: 'TOKEN'),
+                    string(credentialsId: 'VERCEL_ORG_ID', variable: 'ORG_ID'),
+                    string(credentialsId: 'VERCEL_ORG_ID_APISEARCH_PRODUCTION', variable: 'PROJECT_ID')
+                ]) {
+                    sh '''
+                    echo "Deploying to PRODUCTION"
+                    rm -rf dist-prod && mkdir -p dist-prod
+                    tar -xzf package/$APP_NAME-$VERSION.tar.gz -C dist-prod
 
-                        echo "Deploying to Vercel"
-                        mkdir -p dist-deploy
-                        tar -xzf package/$APP_NAME-$VERSION.tar.gz -C dist-deploy
+                    VERCEL_ORG_ID=$ORG_ID \
+                    VERCEL_PROJECT_ID=$PROJECT_ID \
+                    npx vercel dist-prod \
+                        --token $TOKEN \
+                        --yes \
+                        --prod
 
-                        npx vercel dist-deploy \
-                            --token $TOKEN_VERCEL_JENKINS \
-                            --yes \
-                            --prod
-
-                        echo "Production deploy OK"
-                        '''
-                    }
+                    echo "Production deploy OK"
+                    '''
+                }
             }
         }
 
