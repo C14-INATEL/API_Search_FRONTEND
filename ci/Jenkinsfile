@@ -22,7 +22,6 @@ pipeline {
             }
         }
 
-
         stage('Build') {
             steps {
                 sh '''
@@ -39,14 +38,12 @@ pipeline {
 
         stage('Test') {
             steps {
-            sh '''
-            export CHROME_BIN=/usr/bin/google-chrome
+                sh '''
+                export CHROME_BIN=/usr/bin/google-chrome
 
-            npm run test -- --watch=false --browsers=ChromeHeadless
-            '''
+                npm run test -- --watch=false --browsers=ChromeHeadless
+                '''
             }
-
-            
         }
 
         stage('Package') {
@@ -54,10 +51,15 @@ pipeline {
                 sh '''
                 echo "Packaging Angular dist"
                 mkdir -p package
+                
+                # 1. Gera o .tar.gz
                 tar -czf package/$APP_NAME-$VERSION.tar.gz \
                 -C dist/project_FrontEnd .
 
-                echo "Package created successfully"
+                # 2. Gera o .zip (Rodando em subshell para não alterar o diretório base do resto do script)
+                (cd dist/project_FrontEnd && zip -r ../../package/$APP_NAME-$VERSION.zip .)
+
+                echo "Packages created successfully"
                 '''
             }
         }
@@ -72,24 +74,26 @@ pipeline {
                     string(credentialsId: 'TOKEN_VERCEL_JENKINS', variable: 'TOKEN_VERCEL_JENKINS'),
                     string(credentialsId: 'VERCEL_ORG_ID', variable: 'VERCEL_ORG_ID'),
                     string(credentialsId: 'VERCEL_PROJECT_ID', variable: 'VERCEL_PROJECT_ID')
-                    ]) {
-                        sh '''
-                        echo "Deploying to STAGING"
-                        mkdir -p staging
-                        cp package/$APP_NAME-$VERSION.tar.gz staging/
+                ]) {
+                    sh '''
+                    echo "Deploying to STAGING"
+                    mkdir -p staging
+                    cp package/$APP_NAME-$VERSION.tar.gz staging/
+                    cp package/$APP_NAME-$VERSION.zip staging/
 
-                        echo "Deploying to Vercel"
-                        mkdir -p dist-deploy
-                        tar -xzf package/$APP_NAME-$VERSION.tar.gz -C dist-deploy
+                    echo "Deploying to Vercel"
+                    mkdir -p dist-deploy
+                    # Usamos o tar.gz nativo para extrair e mandar para a Vercel
+                    tar -xzf package/$APP_NAME-$VERSION.tar.gz -C dist-deploy
 
-                        npx vercel dist-deploy \
-                            --token $TOKEN_VERCEL_JENKINS \
-                            --yes \
-                            --prod
+                    npx vercel dist-deploy \
+                        --token $TOKEN_VERCEL_JENKINS \
+                        --yes \
+                        --prod
 
-                        echo "Staging deploy OK"
-                        '''
-                    }
+                    echo "Staging deploy OK"
+                    '''
+                }
             }
         }
 
@@ -102,24 +106,25 @@ pipeline {
                     string(credentialsId: 'TOKEN_VERCEL_JENKINS', variable: 'TOKEN_VERCEL_JENKINS'),
                     string(credentialsId: 'VERCEL_ORG_ID', variable: 'VERCEL_ORG_ID'),
                     string(credentialsId: 'VERCEL_PROJECT_ID', variable: 'VERCEL_PROJECT_ID')
-                    ]) {
-                        sh '''
-                        echo "Deploying to PRODUCTION"
-                        mkdir -p prod
-                        cp package/$APP_NAME-$VERSION.tar.gz prod/
+                ]) {
+                    sh '''
+                    echo "Deploying to PRODUCTION"
+                    mkdir -p prod
+                    cp package/$APP_NAME-$VERSION.tar.gz prod/
+                    cp package/$APP_NAME-$VERSION.zip prod/
 
-                        echo "Deploying to Vercel"
-                        mkdir -p dist-deploy
-                        tar -xzf package/$APP_NAME-$VERSION.tar.gz -C dist-deploy
+                    echo "Deploying to Vercel"
+                    mkdir -p dist-deploy
+                    tar -xzf package/$APP_NAME-$VERSION.tar.gz -C dist-deploy
 
-                        npx vercel dist-deploy \
-                            --token $TOKEN_VERCEL_JENKINS \
-                            --yes \
-                            --prod
+                    npx vercel dist-deploy \
+                        --token $TOKEN_VERCEL_JENKINS \
+                        --yes \
+                        --prod
 
-                        echo "Production deploy OK"
-                        '''
-                    }
+                    echo "Production deploy OK"
+                    '''
+                }
             }
         }
 
@@ -129,11 +134,8 @@ pipeline {
                 mkdir -p audit
 
                 echo "Pipeline OK" > audit/audit-log.txt
-
                 echo "App: $APP_NAME" >> audit/audit-log.txt
-
                 echo "Version: $VERSION" >> audit/audit-log.txt
-
                 echo "Build already executed in Build stage" >> audit/audit-log.txt
                 '''
             }
@@ -194,7 +196,8 @@ pipeline {
         }
 
         always {
-            archiveArtifacts 'package/*.tar.gz'
+            # Atualizado para salvar tanto o .tar.gz quanto o .zip como artefatos
+            archiveArtifacts 'package/*.*'
         }
     }
 }
