@@ -11,17 +11,17 @@ pipeline {
     }
 
     stages {
-
-    stage('Checkout') {
-    steps {
-        checkout scm  
-        script {
-            env.LAST_COMMIT = sh(script: "git log -1 --pretty=%B", returnStdout: true).trim()
-            env.BRANCH = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
-            echo "Branch: ${env.BRANCH}"
+        stage('Checkout') {
+            steps {
+                checkout scm  
+                script {
+                    env.LAST_COMMIT = sh(script: "git log -1 --pretty=%B", returnStdout: true).trim()
+                    env.BRANCH = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
+                    echo "Branch: ${env.BRANCH}"
+                }
+            }
         }
-    }
-}
+
 
         stage('Build') {
             steps {
@@ -68,13 +68,28 @@ pipeline {
             }
 
             steps {
-                sh '''
-                echo "Deploying to STAGING"
-                mkdir -p staging
-                cp package/$APP_NAME-$VERSION.tar.gz staging/
+                withCredentials([
+                    string(credentialsId: 'TOKEN_VERCEL_JENKINS', variable: 'TOKEN_VERCEL_JENKINS'),
+                    string(credentialsId: 'VERCEL_ORG_ID', variable: 'VERCEL_ORG_ID'),
+                    string(credentialsId: 'VERCEL_PROJECT_ID', variable: 'VERCEL_PROJECT_ID')
+                    ]) {
+                        sh '''
+                        echo "Deploying to STAGING"
+                        mkdir -p staging
+                        cp package/$APP_NAME-$VERSION.tar.gz staging/
 
-                echo "Staging deploy OK"
-                '''
+                        echo "Deploying to Vercel"
+                        mkdir -p dist-deploy
+                        tar -xzf package/$APP_NAME-$VERSION.tar.gz -C dist-deploy
+
+                        npx vercel dist-deploy \
+                            --token $TOKEN_VERCEL_JENKINS \
+                            --yes \
+                            --prod
+
+                        echo "Staging deploy OK"
+                        '''
+                    }
             }
         }
 
@@ -82,15 +97,29 @@ pipeline {
             when {
                 expression { env.BRANCH == 'main' }
             }
-
             steps {
-                sh '''
-                echo "Deploying to PRODUCTION"
-                mkdir -p prod
-                cp package/$APP_NAME-$VERSION.tar.gz prod/
+                withCredentials([
+                    string(credentialsId: 'TOKEN_VERCEL_JENKINS', variable: 'TOKEN_VERCEL_JENKINS'),
+                    string(credentialsId: 'VERCEL_ORG_ID', variable: 'VERCEL_ORG_ID'),
+                    string(credentialsId: 'VERCEL_PROJECT_ID', variable: 'VERCEL_PROJECT_ID')
+                    ]) {
+                        sh '''
+                        echo "Deploying to PRODUCTION"
+                        mkdir -p prod
+                        cp package/$APP_NAME-$VERSION.tar.gz prod/
 
-                echo "Production deploy OK"
-                '''
+                        echo "Deploying to Vercel"
+                        mkdir -p dist-deploy
+                        tar -xzf package/$APP_NAME-$VERSION.tar.gz -C dist-deploy
+
+                        npx vercel dist-deploy \
+                            --token $TOKEN_VERCEL_JENKINS \
+                            --yes \
+                            --prod
+
+                        echo "Production deploy OK"
+                        '''
+                    }
             }
         }
 
