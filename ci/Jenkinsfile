@@ -108,7 +108,7 @@ pipeline {
                     rm -rf .vercel
                     rm -rf dist-prod && mkdir -p dist-prod
                     tar -xzf package/$APP_NAME-$VERSION.tar.gz -C dist-prod
-                    cp vercel.json dist-staging/vercel.json 
+                    cp vercel.json dist-prod/vercel.json 
 
                     VERCEL_ORG_ID=$ORG_ID \
                     VERCEL_PROJECT_ID=$PROJECT_ID \
