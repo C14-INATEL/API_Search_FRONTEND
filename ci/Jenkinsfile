@@ -22,7 +22,6 @@ pipeline {
             }
         }
 
-
         stage('Build') {
             steps {
                 sh '''
@@ -44,8 +43,6 @@ pipeline {
             npm run test -- --watch=false --browsers=ChromeHeadless
             '''
             }
-
-            
         }
 
         stage('Package') {
@@ -53,9 +50,15 @@ pipeline {
                 sh '''
                 echo "Packaging Angular dist"
                 mkdir -p package
+                
+                # 1. Gera o .tar.gz
                 tar -czf package/$APP_NAME-$VERSION.tar.gz \
                 -C dist/project_FrontEnd .
-                echo "Package created successfully"
+
+                # 2. Gera o .zip (Rodando em subshell para não alterar o diretório base do resto do script)
+                (cd dist/project_FrontEnd && zip -r ../../package/$APP_NAME-$VERSION.zip .)
+
+                echo "Packages created successfully"
                 '''
             }
         }
@@ -122,11 +125,8 @@ pipeline {
                 mkdir -p audit
 
                 echo "Pipeline OK" > audit/audit-log.txt
-
                 echo "App: $APP_NAME" >> audit/audit-log.txt
-
                 echo "Version: $VERSION" >> audit/audit-log.txt
-
                 echo "Build already executed in Build stage" >> audit/audit-log.txt
                 '''
             }
@@ -187,7 +187,8 @@ pipeline {
         }
 
         always {
-            archiveArtifacts 'package/*.tar.gz'
+            # Atualizado para salvar tanto o .tar.gz quanto o .zip como artefatos
+            archiveArtifacts 'package/*.*'
         }
     }
 }
