@@ -117,7 +117,7 @@ pipeline {
                         --yes \
                         --prod
 
-                    echo "Production deploy OK"
+                    echo "Production deploy OK "
                     '''
                 }
             }
