@@ -53,7 +53,7 @@ pipeline {
                 
                 # 1. Gera o .tar.gz
                 tar -czf package/$APP_NAME-$VERSION.tar.gz \
-                -C dist/project_FrontEnd .
+                -C dist/project_FrontEnd/browser .
 
                 # 2. Gera o .zip (Rodando em subshell para não alterar o diretório base do resto do script)
                 (cd dist/project_FrontEnd && zip -r ../../package/$APP_NAME-$VERSION.zip .)
