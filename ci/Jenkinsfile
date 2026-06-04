@@ -187,7 +187,6 @@ pipeline {
         }
 
         always {
-            # Atualizado para salvar tanto o .tar.gz quanto o .zip como artefatos
             archiveArtifacts 'package/*.*'
         }
     }
