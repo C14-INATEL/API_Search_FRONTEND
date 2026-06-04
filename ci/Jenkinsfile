@@ -86,7 +86,7 @@ pipeline {
                         --yes \
                         --prod
 
-                    echo "Staging deploy OK"
+                    echo "Staging deploy OK "
                     '''
                 }
             }
