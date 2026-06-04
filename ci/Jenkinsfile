@@ -16,7 +16,7 @@ pipeline {
                 checkout scm  
                 script {
                     env.LAST_COMMIT = sh(script: "git log -1 --pretty=%B", returnStdout: true).trim()
-                    env.BRANCH = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
+                    env.BRANCH = sh(script: "git name-rev --name-only HEAD | sed 's|remotes/origin/||'", returnStdout: true).trim()
                     echo "Branch: ${env.BRANCH}"
                 }
             }
