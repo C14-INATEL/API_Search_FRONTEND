@@ -58,7 +58,7 @@ pipeline {
                 # 2. Gera o .zip (Rodando em subshell para não alterar o diretório base do resto do script)
                 (cd dist/project_FrontEnd && zip -r ../../package/$APP_NAME-$VERSION.zip .)
 
-                echo "Packages created successfully"
+                echo "Packages created successfully "
                 '''
             }
         }
