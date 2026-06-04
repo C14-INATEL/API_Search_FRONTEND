@@ -12,8 +12,9 @@ export class UserService {
   }
 
   login(email: string, password: string): Observable<number> {
-  return this.httpclient.get<number>(`${API_PATH}/users/login/${email}/${password}`);
-
+    const emailEncod = encodeURIComponent(email);
+    const passwordEncod = encodeURIComponent(password);
+  return this.httpclient.get<number>(`${API_PATH}/users/login/${emailEncod}/${passwordEncod}`);
   }
   errorMessage: string = '';
 
