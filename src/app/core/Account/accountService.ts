@@ -5,7 +5,7 @@ import { AccountInterface } from './accountInterface';
 import { API_PATH } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
-export class AccountService {
+  export class AccountService {
 
   constructor(private http: HttpClient) {}
 
@@ -13,17 +13,21 @@ export class AccountService {
     return this.http.get<AccountInterface[]>(`${API_PATH}/accounts/user/${userId}`);
   }
 
-addMonitored(userId: number, email: string): Observable<string> {
-  const encodedEmail = encodeURIComponent(email);
-  return this.http.post(
-    `${API_PATH}/accounts/accountMonitored/${userId}/${encodedEmail}`,
-    {},
-    { responseType: 'text' }
-  ) as Observable<string>;
-}
+  addMonitored(userId: number, email: string): Observable<string> {
+    const encodedEmail = encodeURIComponent(email);
+    return this.http.post(
+      `${API_PATH}/accounts/accountMonitored/${userId}/${encodedEmail}`,
+      {},
+      { responseType: 'text' }
+    ) as Observable<string>;
+  }
 
   deleteById(id: number): Observable<void> {
     return this.http.delete<void>(`${API_PATH}/accounts/${id}`);
+  }
+
+  deleteByEmail(email: string): Observable<void> {
+    return this.http.delete<void>(`${API_PATH}/accounts/email/${email}`);
   }
 
   refreshEmail(userId: number, email: string): Observable<string> {
@@ -33,5 +37,5 @@ addMonitored(userId: number, email: string): Observable<string> {
     {},
     { responseType: 'text' }
   ) as Observable<string>;
-}
+  }
 }

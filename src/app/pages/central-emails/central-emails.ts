@@ -90,8 +90,29 @@ export class CentralEmails implements OnInit {
     });
   }
 
-  deleteEmail(id: number): void {
+  deleteEmailId(id: number): void {
     this.accountService.deleteById(id).subscribe({
+      next: () => {
+        this.alertTitle = 'Sucesso';
+        this.alertMessage = 'Email removido com sucesso!';
+        this.alertType = 'success';
+        this.showAlert = true;
+        this.loadEmails();
+        this.cdr.detectChanges();
+      },
+      error: () => {
+        this.alertTitle = 'Erro';
+        this.alertMessage = 'Não foi possível remover o email.';
+        this.alertType = 'error';
+        this.showAlert = true;
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
+
+  deleteByEmail(email: string): void {
+    this.accountService.deleteByEmail(email).subscribe({
       next: () => {
         this.alertTitle = 'Sucesso';
         this.alertMessage = 'Email removido com sucesso!';
