@@ -2,11 +2,7 @@
   <div class="animation">
     <div class="cloud-container">
       <div class="cloud">
-        <img
-          src="assets/cloudsvertical.png"
-          alt="cloud"
-          class="img_cloud"
-        />
+        <img src="assets/cloudsvertical.png" alt="cloud" class="img_cloud" />
       </div>
     </div>
 
@@ -18,7 +14,6 @@
   <div class="alingment">
     <div class="container-emails">
       <div class="card-emails">
-
         <div class="top-line">
           <div>
             <h1>API SEARCH</h1>
@@ -27,8 +22,8 @@
 
           <div class="top-actions">
             <button type="button" class="btn-refresh" (click)="refreshAll()">
-            <span class="material-symbols-outlined">refresh</span>
-          </button>
+              <span class="material-symbols-outlined">refresh</span>
+            </button>
 
             <button type="button" class="btn-logout" (click)="logout()">
               <span class="material-symbols-outlined">logout</span>
@@ -48,306 +43,151 @@
           </div>
         </div>
 
-        <div
-          class="empty-state"
-          *ngIf="!isLoading && uniqueEmails.length === 0"
-        >
+        <div class="empty-state" *ngIf="!isLoading && uniqueEmails.length === 0">
           <span class="material-symbols-outlined empty-icon">mail</span>
           <p class="empty-title">Nenhum email cadastrado</p>
-          <p class="empty-desc">
-            Cadastre o primeiro email para começar a monitorar
-          </p>
+          <p class="empty-desc">Cadastre o primeiro email para começar a monitorar</p>
 
-          <button
-            type="button"
-            class="btn-new"
-            (click)="openModal()"
-          >
+          <button type="button" class="btn-new" (click)="openModal()">
             <span class="material-symbols-outlined">add</span>
             Cadastrar primeiro email
           </button>
         </div>
 
-        <div
-          class="loading"
-          *ngIf="isLoading"
-        >
+        <div class="loading" *ngIf="isLoading">
           <span class="spinner"></span>
         </div>
 
-        <div
-          class="table-wrapper"
-          *ngIf="!isLoading && uniqueEmails.length > 0"
-        >
+        <div class="table-wrapper" *ngIf="!isLoading && uniqueEmails.length > 0">
           <div class="table-header">
             <span>Email</span>
             <span>Breaches</span>
             <span>Ações</span>
           </div>
 
-          <div
-            class="table-row"
-            *ngFor="let item of uniqueEmails"
-            (click)="openDetail(item.emailMonitored)"
-          >
-            <span class="email-cell">
-              {{ item.emailMonitored }}
-            </span>
+          <div class="table-row" *ngFor="let item of uniqueEmails" (click)="openDetail(item.emailMonitored)">
+            <span class="email-cell">{{ item.emailMonitored }}</span>
 
             <span class="breach-cell">
-              <span
-                class="breach-count"
-                [class.breach-count--none]="breachCount(item.emailMonitored) === 0"
-              >
-                {{ breachCount(item.emailMonitored) }}
-                breach{{ breachCount(item.emailMonitored) !== 1 ? 'es' : '' }}
+              <span class="breach-count" [class.breach-count--none]="breachCount(item.emailMonitored) === 0">
+                {{ breachCount(item.emailMonitored) }} breach{{ breachCount(item.emailMonitored) !== 1 ? 'es' : '' }}
               </span>
             </span>
 
-            <div
-              class="actions-cell"
-              (click)="$event.stopPropagation()"
-            >
-              <button
-                type="button"
-                class="btn-delete"
-                (click)="deleteByEmail(item.emailMonitored)"
-              >
+            <div class="actions-cell" (click)="$event.stopPropagation()">
+              <button type="button" class="btn-delete" (click)="deleteByEmail(item.emailMonitored)">
                 <span class="material-symbols-outlined">delete</span>
               </button>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 </section>
 
-<div
-  class="modal-overlay"
-  *ngIf="showModal"
-  (click)="closeModal()"
->
-  <div
-    class="modal-card"
-    (click)="$event.stopPropagation()"
-  >
-    <img
-      src="assets/API_logo.png"
-      width="20%"
-      class="logo"
-    />
+<div class="modal-overlay" *ngIf="showModal" (click)="closeModal()">
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    <img src="assets/API_logo.png" width="20%" class="logo" />
 
     <p class="modal-title">Adicionar email</p>
-    <p class="modal-desc">
-      Digite o email que deseja monitorar
-    </p>
+    <p class="modal-desc">Digite o email que deseja monitorar</p>
 
     <div class="input-group">
       <label>Email</label>
-
-      <input
-        type="email"
-        placeholder="Digite o email"
-        [(ngModel)]="newEmail"
-        name="newEmail"
-        (keyup.enter)="addEmail()"
-      />
+      <input type="email" placeholder="Digite o email" [(ngModel)]="newEmail" name="newEmail" (keyup.enter)="addEmail()" />
     </div>
 
-    <button
-      type="button"
-      class="btn-confirm"
-      (click)="addEmail()"
-      [disabled]="isLoadingModal"
-    >
+    <button type="button" class="btn-confirm" (click)="addEmail()" [disabled]="isLoadingModal">
       <span *ngIf="!isLoadingModal">Adicionar</span>
-      <span
-        *ngIf="isLoadingModal"
-        class="spinner"
-      ></span>
+      <span *ngIf="isLoadingModal" class="spinner"></span>
     </button>
 
-    <button
-      type="button"
-      class="btn-cancel"
-      (click)="closeModal()"
-    >
-      Cancelar
-    </button>
+    <button type="button" class="btn-cancel" (click)="closeModal()">Cancelar</button>
   </div>
 </div>
 
-<div
-  class="modal-overlay detail-overlay"
-  *ngIf="showDetailModal"
-  (click)="closeDetail()"
->
-  <div
-    class="detail-card"
-    (click)="$event.stopPropagation()"
-  >
+<div class="modal-overlay detail-overlay" *ngIf="showDetailModal" (click)="closeDetail()">
+  <div class="detail-card" (click)="$event.stopPropagation()">
     <div class="detail-header">
       <div>
         <p class="detail-label">Email monitorado</p>
         <h2 class="detail-email">{{ selectedEmail }}</h2>
       </div>
 
-      <button
-        class="btn-close-detail"
-        (click)="closeDetail()"
-      >
+      <button class="btn-close-detail" (click)="closeDetail()">
         <span class="material-symbols-outlined">close</span>
       </button>
     </div>
 
     <div class="detail-summary">
-      <div
-        class="summary-pill"
-        [class.summary-pill--safe]="selectedBreaches.length === 0 || !selectedBreaches[0].nameBreaches"
-      >
+      <div class="summary-pill" [class.summary-pill--safe]="selectedBreaches.length === 0 || !selectedBreaches[0].nameBreaches">
         <span class="material-symbols-outlined">
           {{ selectedBreaches[0]?.nameBreaches ? 'warning' : 'shield' }}
         </span>
-
-        {{
-          breachCount(selectedEmail) === 0
-            ? 'Email seguro'
-            : breachCount(selectedEmail) + ' vazamento(s) encontrado(s)'
-        }}
+        {{ breachCount(selectedEmail) === 0 ? 'Email seguro' : breachCount(selectedEmail) + ' vazamento(s) encontrado(s)' }}
       </div>
     </div>
 
-    <div
-      class="no-breach"
-      *ngIf="breachCount(selectedEmail) === 0"
-    >
-      <span class="material-symbols-outlined no-breach-icon">
-        verified_user
-      </span>
+    <div class="no-breach" *ngIf="breachCount(selectedEmail) === 0">
+      <span class="material-symbols-outlined no-breach-icon">verified_user</span>
       <p>Nenhum vazamento encontrado para este email.</p>
     </div>
 
-    <div
-      class="breach-list"
-      *ngIf="breachCount(selectedEmail) > 0"
-    >
-      <div
-        class="breach-item"
-        *ngFor="let b of selectedBreaches"
-        (click)="toggleExpand(b.id!)"
-      >
+    <div class="breach-list" *ngIf="breachCount(selectedEmail) > 0">
+      <div class="breach-item" *ngFor="let b of selectedBreaches" (click)="toggleExpand(b.id!)">
         <div class="breach-item-top">
-          <img
-            *ngIf="b.logoPath"
-            [src]="b.logoPath"
-            [alt]="b.nameBreaches"
-            class="breach-logo"
-            (error)="$any($event.target).style.display='none'"
-          />
+          <img *ngIf="b.logoPath" [src]="b.logoPath" [alt]="b.nameBreaches" class="breach-logo" (error)="$any($event.target).style.display='none'" />
 
           <div class="breach-item-info">
-            <span class="breach-name">
-              {{ b.nameBreaches || '—' }}
-            </span>
-
-            <span class="breach-domain">
-              {{ b.domain || '' }}
-            </span>
+            <span class="breach-name">{{ b.nameBreaches || '—' }}</span>
+            <span class="breach-domain">{{ b.domain || '' }}</span>
           </div>
 
-          <span class="breach-date">
-            {{ b.breachDate | date:'MMM yyyy' }}
-          </span>
+          <span class="breach-date">{{ b.breachDate | date:'MMM yyyy' }}</span>
         </div>
 
-        <div
-          class="breach-tags"
-          *ngIf="b.dataClasses && b.dataClasses.length > 0"
-        >
-          <span
-            class="tag"
-            *ngFor="let dc of b.dataClasses"
-          >
-            {{ dc }}
-          </span>
+        <div class="breach-tags" *ngIf="b.dataClasses && b.dataClasses.length > 0">
+          <span class="tag" *ngFor="let dc of b.dataClasses">{{ dc }}</span>
         </div>
 
         <div class="breach-meta">
           <span class="meta-item">
-            <span class="material-symbols-outlined meta-icon">
-              person
-            </span>
+            <span class="material-symbols-outlined meta-icon">person</span>
             {{ formatCount(b.pwnCount) }} afetados
           </span>
 
-          <span
-            class="meta-item"
-            *ngIf="b.verified"
-          >
-            <span class="material-symbols-outlined meta-icon">
-              verified
-            </span>
+          <span class="meta-item" *ngIf="b.verified">
+            <span class="material-symbols-outlined meta-icon">verified</span>
             Verificado
           </span>
 
-          <span
-            class="meta-item"
-            *ngIf="b.ssensitive"
-          >
-            <span class="material-symbols-outlined meta-icon">
-              lock
-            </span>
+          <span class="meta-item" *ngIf="b.ssensitive">
+            <span class="material-symbols-outlined meta-icon">lock</span>
             Sensível
           </span>
         </div>
 
-        <div
-          class="breach-expand"
-          *ngIf="expandedBreachId === b.id"
-        >
-          <p
-            class="breach-description"
-            [innerHTML]="b.description"
-          ></p>
+        <div class="breach-expand" *ngIf="expandedBreachId === b.id">
+          <p class="breach-description" [innerHTML]="b.description"></p>
 
           <div class="breach-extra">
             <span *ngIf="b.attribution">
-              <span class="material-symbols-outlined meta-icon">
-                alternate_email
-              </span>
+              <span class="material-symbols-outlined meta-icon">alternate_email</span>
               {{ b.attribution }}
             </span>
 
             <span *ngIf="b.addedDate">
-              <span class="material-symbols-outlined meta-icon">
-                calendar_today
-              </span>
-              Adicionado:
-              {{ b.addedDate | date:'dd/MM/yyyy' }}
+              <span class="material-symbols-outlined meta-icon">calendar_today</span>
+              Adicionado: {{ b.addedDate | date:'dd/MM/yyyy' }}
             </span>
           </div>
         </div>
       </div>
     </div>
 
-    <button
-      type="button"
-      class="btn-cancel"
-      style="margin-top: 16px;"
-      (click)="closeDetail()"
-    >
-      Fechar
-    </button>
+    <button type="button" class="btn-cancel" style="margin-top: 16px;" (click)="closeDetail()">Fechar</button>
   </div>
 </div>
 
-<app-alert
-  *ngIf="showAlert"
-  [type]="alertType"
-  [message]="alertMessage"
-  [title]="alertTitle"
-  (closed)="onAlertClose()"
->
-</app-alert>
+<app-alert *ngIf="showAlert" [type]="alertType" [message]="alertMessage" [title]="alertTitle" (closed)="onAlertClose()"></app-alert>
