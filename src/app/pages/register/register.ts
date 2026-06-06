@@ -62,20 +62,14 @@ function passwordMatchValidator(group: AbstractControl): ValidationErrors | null
   templateUrl: './register.html',
   styleUrls: ['./register.css'],
 })
-export class Register implements OnInit, OnDestroy {
+export class Register implements OnInit {
   registerForm!: FormGroup;
   isLoading: boolean = false;
   showAlert = false;
   alertMessage = '';
   alertTitle = '';
   alertType: 'success' | 'error' | 'warning' = 'success';
-  alreadyRegistered: boolean = false;
   mostrarSenha: boolean = false;
-
-  // Variáveis para controle do timer
-  private timeoutId: any;
-  private readonly REGISTRATION_TIMEOUT_KEY = 'registrationExpirationTime';
-  private readonly TIMEOUT_DURATION = 5 * 60 * 1000; // 5 minutos em milissegundos
 
   constructor(
     private fb: FormBuilder,
@@ -91,16 +85,6 @@ export class Register implements OnInit, OnDestroy {
       password: ['', [Validators.required, passwordComplexityValidator]],
       confirmPassword: ['', [Validators.required]]
     }, { validators: passwordMatchValidator });
-
-    // Assim que a página carrega, verifica se o timer ainda está rodando
-    this.checkRegistrationTimeout(); 
-  }
-
-  ngOnDestroy(): void {
-    // Limpa o timer se o componente for destruído (ex: usuário mudou de rota)
-    if (this.timeoutId) {
-      clearTimeout(this.timeoutId);
-    }
   }
 
   get f() { return this.registerForm.controls; }
@@ -108,63 +92,6 @@ export class Register implements OnInit, OnDestroy {
   toggleSenha() {
     this.mostrarSenha = !this.mostrarSenha;
   }
-
-  // Conrolador do Timer
-  private checkRegistrationTimeout(): void {
-    const expirationStr = localStorage.getItem(this.REGISTRATION_TIMEOUT_KEY);
-    
-    if (expirationStr) {
-      const expirationTime = parseInt(expirationStr, 10);
-      const currentTime = Date.now();
-
-      if (currentTime >= expirationTime) {
-        // Cenário: O usuário atualizou a página e os 5 minutos JÁ PASSARAM
-        console.log('O tempo acabou, você pode fazer uma nova requisição.');
-        
-        this.clearRegistrationState();
-      } else {
-        // Cenário: O usuário atualizou a página e AINDA ESTÁ dentro dos 5 minutos
-        console.log('Espere 5 minutos para fazer uma nova requisição.');
-        
-        this.alreadyRegistered = true;
-        const remainingTime = expirationTime - currentTime;
-        this.startTimer(remainingTime);
-      }
-    }
-  }
-
-  private setRegistrationTimeout(): void {
-    this.alreadyRegistered = true;
-    const expirationTime = Date.now() + this.TIMEOUT_DURATION;
-    
-    localStorage.setItem(this.REGISTRATION_TIMEOUT_KEY, expirationTime.toString());
-    
-    // Cenário: O usuário ACABOU de fazer o cadastro com sucesso
-    console.log('Espere 5 minutos para fazer uma nova requisição.');
-    
-    this.startTimer(this.TIMEOUT_DURATION);
-  }
-
-  private startTimer(duration: number): void {
-    if (this.timeoutId) {
-      clearTimeout(this.timeoutId);
-    }
-    
-    this.timeoutId = setTimeout(() => {
-      // Cenário: O usuário ficou na página esperando os 5 minutos passarem
-      console.log('O tempo acabou, você pode fazer uma nova requisição.');
-      
-      this.clearRegistrationState();
-      this.cdr.detectChanges(); 
-    }, duration);
-  }
-
-  private clearRegistrationState(): void {
-    this.alreadyRegistered = false;
-    localStorage.removeItem(this.REGISTRATION_TIMEOUT_KEY);
-  }
-
-  // --- FINAL DO CONTROLE DO TIMER ---
 
   save(): void {
     if (this.registerForm.invalid) {
@@ -251,7 +178,6 @@ export class Register implements OnInit, OnDestroy {
         this.alertMessage = 'Usuário cadastrado com sucesso!';
         this.alertType = 'success'; 
         this.showAlert = true;
-        this.setRegistrationTimeout(); 
         this.cdr.detectChanges();
       },
       error: (error) => {
