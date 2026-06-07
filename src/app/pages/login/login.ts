@@ -34,7 +34,7 @@ export class Login {
 
   login(): void {
     this.isLoading = true;
-    this.userService.login(this.credentials.email, this.credentials.password).subscribe({
+    this.userService.login(this.credentials.email, encodeURIComponent(this.credentials.password)).subscribe({
       next: (userId: number) => {
         this.isLoading = false;
         localStorage.setItem('userId', userId.toString());
