@@ -34,10 +34,17 @@ import { API_PATH } from '../../../environments/environment';
 
   refreshEmail(userId: number, email: string): Observable<string> {
   const encodedEmail = encodeURIComponent(email);
-  return this.http.put(
-    `${API_PATH}/accounts/refresh/${userId}/${encodedEmail}`,
-    {},
-    { responseType: 'text' }
-  ) as Observable<string>;
-  }
+    return this.http.put(
+      `${API_PATH}/accounts/refresh/${userId}/${encodedEmail}`,
+      {},
+      { responseType: 'text' }
+    ) as Observable<string>;
+    }
+
+  checkPassword(password: string): Observable<string> {
+    return this.http.get(
+      `${API_PATH}/checkPassword/password?password=${encodeURIComponent(password)}`,
+      { responseType: 'text' }
+    );
+    }
 }

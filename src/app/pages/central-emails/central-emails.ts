@@ -20,6 +20,11 @@ export class CentralEmails implements OnInit {
   showModal = false;
   newEmail = '';
   isLoadingModal = false;
+  showPasswordModal = false;
+  checkPasswordConsent = false;
+  newPassword = '';
+  passwordResult = '';
+  isCheckingPassword = false;
 
   showAlert = false;
   alertMessage = '';
@@ -49,6 +54,8 @@ export class CentralEmails implements OnInit {
 
   closeModal(): void {
     this.showModal = false;
+    this.newPassword = '';
+    this.passwordResult = '';
   }
 
   openDetail(emailMonitored: string): void {
@@ -218,5 +225,36 @@ export class CentralEmails implements OnInit {
     };
 
     refreshSequencial(0);
+  }
+
+  checkPassword(): void {
+  if (!this.newPassword) return;
+  this.isCheckingPassword = true;
+  this.passwordResult = '';
+  this.accountService.checkPassword(this.newPassword).subscribe({
+    next: (result) => {
+      this.isCheckingPassword = false;
+      this.passwordResult = result;
+      this.cdr.detectChanges();
+    },
+    error: () => {
+      this.isCheckingPassword = false;
+      this.passwordResult = 'Erro ao verificar senha.';
+      this.cdr.detectChanges();
+    }
+    });
+  }
+
+  openPasswordModal(): void {
+  this.showPasswordModal = true;
+  this.newPassword = '';
+  this.passwordResult = '';
+  }
+
+  closePasswordModal(): void {
+    this.showPasswordModal = false;
+
+    this.newPassword = '';
+    this.passwordResult = '';
   }
 }

@@ -104,6 +104,46 @@
     </button>
 
     <button type="button" class="btn-cancel" (click)="closeModal()">Cancelar</button>
+
+     <button type="button" class="btn-verifypassword-first" (click)="openPasswordModal()">
+      <span class="material-symbols-outlined">shield</span>
+      Verificar senha
+    </button>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="showPasswordModal" (click)="closePasswordModal()">
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    <img src="assets/API_logo.png" width="20%" class="logo" />
+    <p class="modal-title">Verificar Senha</p>
+    <p class="modal-desc">🔒 Nenhuma senha é armazenada ou enviada para nossos servidores</p>
+
+    <div class="input-group">
+      <label>Senha</label>
+      <input type="password" placeholder="Digite sua senha"
+             [(ngModel)]="newPassword" name="newPassword"
+             (keyup.enter)="checkPassword()" />
+    </div>
+
+    <div *ngIf="passwordResult" class="password-result"
+         [class.password-result--danger]="passwordResult.includes('leaked')"
+         [class.password-result--safe]="!passwordResult.includes('leaked')">
+      <span class="material-symbols-outlined">
+        {{ passwordResult.includes('leaked') ? 'warning' : 'shield' }}
+      </span>
+      {{ passwordResult.includes('leaked')
+          ? 'Senha comprometida! Encontrada ' + passwordResult.replace('Password leaked ', '').replace(' time', ' vez(es) em vazamentos conhecidos.')
+          : 'Senha não encontrada em vazamentos' }}
+    </div>
+
+    <button type="button" class="btn-verifypassword" (click)="checkPassword()"
+            [disabled]="isCheckingPassword || !newPassword">
+            <span _ngcontent-ng-c3122410088="" class="material-symbols-outlined">shield</span>
+      <span *ngIf="!isCheckingPassword">Verificar</span>
+      <span *ngIf="isCheckingPassword" class="spinner"></span>
+    </button>
+
+    <button type="button" class="btn-cancel" (click)="closePasswordModal()">Voltar</button>
   </div>
 </div>
 
