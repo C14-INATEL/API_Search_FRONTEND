@@ -4,14 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { AccountService } from '../../core/Account/accountService';
 import { AccountInterface } from '../../core/Account/accountInterface';
 import { Alert } from '../alert/alert/alert';
-import { timer } from 'rxjs';
+import { switchMap, timer } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-central-emails',
   standalone: true,
   imports: [CommonModule, RouterLink, FormsModule, Alert],
-  templateUrl: './central-emails.html',
+  templateUrl: './central-emails.html', 
   styleUrls: ['./central-emails.css'],
 })
 export class CentralEmails implements OnInit {
@@ -43,7 +43,7 @@ export class CentralEmails implements OnInit {
   }
 
   openModal(): void {
-    this.showModal = true;
+    this.showModal = true
     this.newEmail = '';
   }
 
@@ -66,7 +66,8 @@ export class CentralEmails implements OnInit {
   addEmail(): void {
     if (!this.newEmail) return;
     this.isLoadingModal = true;
-    this.accountService.addMonitored(this.userId, this.newEmail).subscribe({
+    this.accountService.addMonitored(this.userId, this.newEmail)
+    .subscribe({
       next: () => {
         this.isLoadingModal = false;
         this.showModal = false;
@@ -75,7 +76,7 @@ export class CentralEmails implements OnInit {
         this.alertType = 'success';
         this.showAlert = true;
         this.cdr.detectChanges();
-        timer(3500).subscribe(() => {
+        timer(2000).subscribe(() => {
           this.loadEmails();
         });
       },
