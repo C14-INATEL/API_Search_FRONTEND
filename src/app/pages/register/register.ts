@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
@@ -68,8 +68,7 @@ export class Register implements OnInit {
   showAlert = false;
   alertMessage = '';
   alertTitle = '';
-  alertType: 'success' | 'error' | 'warning' = 'success'; 
-
+  alertType: 'success' | 'error' | 'warning' = 'success';
   mostrarSenha: boolean = false;
 
   constructor(
