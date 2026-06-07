@@ -7,7 +7,9 @@ import { API_PATH } from '../../../environments/environment';
 @Injectable({ providedIn: 'root' })
   export class AccountService {
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient
+  ) {}
 
   getByUserId(userId: number): Observable<AccountInterface[]> {
     return this.http.get<AccountInterface[]>(`${API_PATH}/accounts/user/${userId}`);
