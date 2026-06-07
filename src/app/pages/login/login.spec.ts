@@ -36,9 +36,9 @@ describe('Login', () => {
   // testing html 
   describe('Estrutura do template', () => {
 
-    it('should show title "API SEARCH"', () => {
+    it('should show title "SAFE ACCOUNTS"', () => {
       const h1 = fixture.debugElement.query(By.css('h1'));
-      expect(h1.nativeElement.textContent).toContain('API SEARCH');
+      expect(h1.nativeElement.textContent).toContain('SAFE ACCOUNTS');
     });
 
     it('should own the field email', () => {

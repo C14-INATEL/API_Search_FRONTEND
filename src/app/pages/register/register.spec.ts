@@ -57,9 +57,9 @@ describe('Register', () => {
   // verify stucture of Html
   describe('Structure of template', () => {
 
-    it('Should show title "API SEARCH"', () => {
+    it('Should show title "SAFE ACCOUNTS"', () => {
       const h1 = fixture.debugElement.query(By.css('h1'));
-      expect(h1.nativeElement.textContent).toContain('API SEARCH');
+      expect(h1.nativeElement.textContent).toContain('SAFE ACCOUNTS');
     });
 
     it('Should have the name field', () => {
