@@ -226,17 +226,17 @@ describe('Register', () => {
     };
 
     it('Should call userService.saveUser with form data', () => {
-      spyOn(userService, 'saveUser').and.callThrough();
+    spyOn(userService, 'saveUser').and.callThrough();
 
-      fillValidForm();
-      component.save();
+    fillValidForm();
+    component.save();
 
-      expect(userService.saveUser).toHaveBeenCalledWith({
-        name: 'Joao Silva',
-        email: 'joao@email.com',
-        password: 'Senha@123456'
-      });
+    expect(userService.saveUser).toHaveBeenCalledWith({
+      name: 'Joao Silva',
+      email: 'joao@email.com',
+      password: encodeURIComponent('Senha@123456')
     });
+  });
 
     it('Should show alert with type success when save with success', () => {
       spyOn(userService, 'saveUser').and.returnValue(of({ id: 1 }));
