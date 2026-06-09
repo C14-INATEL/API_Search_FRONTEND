@@ -33,20 +33,26 @@ export class Login {
   }
 
   login(): void {
-    this.isLoading = true;
-    this.userService.login(this.credentials.email, encodeURIComponent(this.credentials.password)).subscribe({
-      next: (userId: number) => {
-        this.isLoading = false;
-        localStorage.setItem('userId', userId.toString());
-        this.router.navigate(['/central-emails']);
-      },
-      error: () => {
-        this.isLoading = false;
+  this.isLoading = true;
+  this.userService.login(this.credentials.email, encodeURIComponent(this.credentials.password)).subscribe({
+    next: (userId: number) => {
+      this.isLoading = false;
+      localStorage.setItem('userId', userId.toString());
+      this.router.navigate(['/central-emails']);
+    },
+    error: (err: any) => {
+      this.isLoading = false;
+      if (err.status === 429) {
+        this.alertTitle = 'Atenção';
+        this.alertMessage = 'Muitas tentativas. Aguarde alguns segundos.';
+        this.alertType = 'warning';
+      } else {
         this.alertTitle = 'Erro';
         this.alertMessage = 'Email ou senha incorretos.';
         this.alertType = 'error';
-        this.showAlert = true;
-        this.cdr.detectChanges();
+      }
+      this.showAlert = true;
+      this.cdr.detectChanges();
       }
     });
   }
@@ -54,4 +60,5 @@ export class Login {
   onAlertClose() {
     this.showAlert = false;
   }
+  
 }
