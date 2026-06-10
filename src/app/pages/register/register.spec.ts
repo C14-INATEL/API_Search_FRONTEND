@@ -256,6 +256,7 @@ describe('Register', () => {
       
       expect(component.showAlert).toBeTrue();
       expect(component.alertType).toBe('error');
+      expect(component.alertMessage).toBe('Não foi possível realizar seu cadastro no momento.');
     });
 
     it('Should handle with error when save user', () => {
@@ -307,7 +308,6 @@ describe('Register', () => {
 
   });
 
-  //isLoading / Spinner 
   describe('isLoading', () => {
 
     it('Should start isLoading as false', () => {
