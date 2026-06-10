@@ -38,10 +38,12 @@ pipeline {
 
         stage('Test') {
             steps {
-            sh '''
-            export CHROME_BIN=/usr/bin/google-chrome
-            npm run test -- --watch=false --browsers=ChromeHeadless
-            '''
+                sh '''
+                export CHROME_BIN=/usr/bin/google-chrome
+                npm run test -- --watch=false --browsers=ChromeHeadless
+                echo "--- arquivos gerados ---"
+                ls -la test-results/ || echo "pasta test-results nao existe"
+                '''
             }
         }
 
@@ -191,6 +193,7 @@ pipeline {
         }
 
         always {
+            junit '**/test-results/results.xml' 
             archiveArtifacts 'package/*.*'
         }
     }

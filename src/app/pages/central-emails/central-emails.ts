@@ -108,12 +108,18 @@ export class CentralEmails implements OnInit {
         this.loadEmails();
         this.cdr.detectChanges();
       },
-      error: () => {
-        this.alertTitle = 'Erro';
-        this.alertMessage = 'Não foi possível remover o email.';
-        this.alertType = 'error';
-        this.showAlert = true;
-        this.cdr.detectChanges();
+      error: (err: any) => {
+        if (err.status === 429) {
+          this.alertMessage = 'Muitas tentativas. Aguarde alguns segundos.';
+          this.alertType = 'warning';
+          this.showAlert = true;
+        } else {
+          this.alertTitle = 'Erro';
+          this.alertMessage = 'Não foi possível remover o email.';
+          this.alertType = 'error';
+        }
+          this.showAlert = true;
+          this.cdr.detectChanges();
       }
     });
   }
@@ -129,13 +135,19 @@ export class CentralEmails implements OnInit {
         this.loadEmails();
         this.cdr.detectChanges();
       },
-      error: () => {
+      error: (err: any) => {
+        if (err.status === 429) {
+          this.alertMessage = 'Muitas tentativas. Aguarde alguns segundos.';
+          this.alertType = 'warning';
+          this.showAlert = true;
+        } else {
         this.alertTitle = 'Erro';
         this.alertMessage = 'Não foi possível remover o email.';
         this.alertType = 'error';
+        }
         this.showAlert = true;
         this.cdr.detectChanges();
-      }
+    }
     });
   }
 
@@ -182,7 +194,12 @@ export class CentralEmails implements OnInit {
         this.isLoading = false;
         this.cdr.detectChanges();
       },
-      error: () => {
+      error: (err: any) => {
+        if (err.status === 429) {
+          this.alertMessage = 'Muitas tentativas. Aguarde alguns segundos.';
+          this.alertType = 'warning';
+          this.showAlert = true;
+        }
         this.isLoading = false;
         this.cdr.detectChanges();
       }
@@ -218,8 +235,14 @@ export class CentralEmails implements OnInit {
         next: () => {
           setTimeout(() => refreshSequencial(index + 1), 2000);
         },
-        error: () => {
+        error: (err: any) => {
+          if (err.status === 429) {
+            this.alertMessage = 'Muitas tentativas. Aguarde alguns segundos.';
+            this.alertType = 'warning';
+            this.showAlert = true;
+          } else {
           setTimeout(() => refreshSequencial(index + 1), 2000);
+          }
         }
       });
     };
