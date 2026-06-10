@@ -24,6 +24,10 @@ export class UserService {
       );
   }
 
+  checkEmailExists(email: string): Observable<boolean> {
+    return this.httpclient.get<boolean>(`${API_PATH}/users/check-email?email=${email}`).pipe(catchError(this.errorHandler));
+  }
+
   private errorHandler(error: HttpErrorResponse) {
 
     let message = '';
