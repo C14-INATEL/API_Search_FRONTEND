@@ -346,4 +346,59 @@ describe('Register', () => {
 
   });
 
+  describe('Verifyng Alert Window open', () => {
+
+    const fillFormWith = (name = 'Joao Silva', email = 'joao@email.com', password = 'Password@1234', confirmPassword = 'Password@1234') => {
+      component.registerForm.patchValue({ name, email, password, confirmPassword });
+    };
+
+    it('Should show error alert if required fields are empty', () => {
+      component.save();
+      expect(component.alertType).toBe('error');
+      expect(component.alertMessage).toBe('Não foi possível realizar, alguns campos estão vazios.');
+      expect(component.showAlert).toBeTrue();
+    });
+
+    it('Should show error alert if name is too short', () => {
+      fillFormWith('Ana');
+      component.save();
+      expect(component.alertType).toBe('error');
+      expect(component.alertMessage).toBe('O nome deve ter no mínimo 5 caracteres.');
+      expect(component.showAlert).toBeTrue();
+    });
+
+    it('Should show error alert if name has numbers or symbols', () => {
+      fillFormWith('Joao Silva 123');
+      component.save();
+      expect(component.alertType).toBe('error');
+      expect(component.alertMessage).toBe('O nome não pode conter números ou símbolos. Use apenas letras.');
+      expect(component.showAlert).toBeTrue();
+    });
+
+    it('Should show error alert if email is invalid or has wrong domain', () => {
+      fillFormWith('Joao Silva', 'joao@email');
+      component.save();
+      expect(component.alertType).toBe('error');
+      expect(component.alertMessage).toBe('O Email deve conter um endereço válido.');
+      expect(component.showAlert).toBeTrue();
+    });
+
+    it('Should show error alert if password lacks complexity', () => {
+      fillFormWith('Joao Silva', 'joao@email.com', 'senhafraca', 'senhafraca');
+      component.save();
+      expect(component.alertType).toBe('error');
+      expect(component.alertMessage).toBe('A senha deve conter no mínimo 12 caracteres, 1 letra maiúscula, 1 número e um símbolo.');
+      expect(component.showAlert).toBeTrue();
+    });
+
+    it('Should show error alert if passwords do not match', () => {
+      fillFormWith('Joao Silva', 'joao@email.com', 'Password@1234', 'Password@0000');
+      component.save();
+      expect(component.alertType).toBe('error');
+      expect(component.alertMessage).toBe('As senhas não coincidem.');
+      expect(component.showAlert).toBeTrue();
+    });
+
+  });
+
 });
