@@ -321,12 +321,14 @@ describe('Register', () => {
     });
 
     it('Should set isLoading to false after save success', () => {
+      component.registerForm.patchValue({name: 'Joao Silva', email: 'joao@email.com', password: 'Senha@123456', confirmPassword: 'Senha@123456'});
       spyOn(userService, 'saveUser').and.returnValue(of({ id: 1 }));
       component.save();
       expect(component.isLoading).toBeFalse();
     });
 
     it('Should set isLoading to false after save error', () => {
+      component.registerForm.patchValue({name: 'Joao Silva', email: 'joao@email.com', password: 'Senha@123456', confirmPassword: 'Senha@123456'});
       spyOn(userService, 'saveUser').and.returnValue(throwError(() => new Error('erro')));
       component.save();
       expect(component.isLoading).toBeFalse();
