@@ -90,6 +90,7 @@ export class Login implements OnInit {
     this.userService.login(email, password).subscribe({
       next: (userId: number) => {
         this.isLoading = false;
+        localStorage.setItem('logged', 'true');
         localStorage.setItem('userId', userId.toString());
         this.router.navigate(['/central-emails']);
       },
