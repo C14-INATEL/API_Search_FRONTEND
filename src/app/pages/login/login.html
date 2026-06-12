@@ -16,13 +16,12 @@
         <img src="assets/API_logo.png" width="30%" class="logo">
         <h1>SAFE ACCOUNTS</h1>
 
-        <form>
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
           <div class="input-group">
             <label>Email</label>
             <input type="email"
                    placeholder="Digite seu email"
-                   [(ngModel)]="credentials.email"
-                   name="email"/>
+                   formControlName="email" />
           </div>
 
           <div class="input-group">
@@ -30,9 +29,7 @@
             <input [type]="mostrarSenha ? 'text' : 'password'"
                    placeholder="Digite sua Senha"
                    autocomplete="current-password"
-                   [(ngModel)]="credentials.password"
-                   name="password"
-                   (keyup.enter)="login()"/>
+                   formControlName="password" />
 
             <div class="show-icon" *ngIf="mostrarSenha" (click)="toggleSenha()">
               <span class="material-symbols-outlined">visibility</span>
@@ -41,18 +38,18 @@
               <span class="material-symbols-outlined">visibility_off</span>
             </div>
           </div>
-        </form>
 
-        <button type="button" id="btn" class="login" (click)="login()" [disabled]="isLoading">
-          <span *ngIf="!isLoading">Entrar</span>
-          <span *ngIf="isLoading" class="spinner"></span>
-        </button>
+          <button type="submit" id="btn" class="login" [disabled]="isLoading">
+            <span *ngIf="!isLoading">Entrar</span>
+            <span *ngIf="isLoading" class="spinner"></span>
+          </button>
+        </form>
 
         <p class="p2">Ainda não tem uma conta? </p>
         <button class="go-register" routerLink="/register"> Registrar-se</button>
         <p class="p2"></p>
         <!-- <button class="forgot_password" routerLink="/forgot-password">Esqueci minha senha</button> -->
-      </div>  
+        </div>  
     </div>
   </div>
 </section>
