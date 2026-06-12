@@ -47,17 +47,17 @@ Após entrar na Aplicação, você Você verá uma tela com suas contas cadastra
 
 Caso ainda não tenha uma conta, adicione uma clicando no botão Novo Email
 
-<img src="/src/assets/readme-photos/AdicionarEmail.png width="500">
+<img src="/src/assets/readme-photos/AdicionarEmail.png" width="500">
 
 Ao Registrar um Alerta Aparecerá indicando que o email foi registrado na sua conta
 
-<img src="/src/assets/readme-photos/SucessAddEmail.png width="500">
+<img src="/src/assets/readme-photos/SucessAddEmail.png" width="500">
 
 Aguarde Alguns segundos e pronto, sua conta mostrará quantas vezes foram vazadas
 
 Para visualizar mais detalhes, clique no email cadastrado e abrirá uma lista com mais detalhes sobre onde, o que e quando foi vazado esse email.
 
-<img src="/src/assets/readme-photos/ListLeakedEmail.png width="500">
+<img src="/src/assets/readme-photos/ListLeakedEmail.png" width="500">
 
 ## Uso de IA
 
