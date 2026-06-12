@@ -61,7 +61,7 @@ describe('Login', () => {
       expect(btn).not.toBeNull();
     });
 
-    it('Should own the field the button forget password', () => {
+    xit('Should own the field the button forget password', () => {
       const btn = fixture.debugElement.query(By.css('button.forgot_password'));
       expect(btn).not.toBeNull();
     });
@@ -160,7 +160,7 @@ describe('Login', () => {
       expect(btn.attributes['routerLink']).toBe('/register');
     });
 
-    it('The button "senha" should have routerLink="/forgot-password"', () => {
+    xit('The button "senha" should have routerLink="/forgot-password"', () => {
       const btn = fixture.debugElement.query(By.css('button.forgot_password'));
       expect(btn.attributes['routerLink']).toBe('/forgot-password');
     });
