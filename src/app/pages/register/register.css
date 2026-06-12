@@ -63,7 +63,7 @@ app-root {
   position: relative;
   width: 90%;
   max-width: 400px;
-  max-height: 760px;
+  max-height: 780px;
   border-radius: 22px;
   padding: 40px 30px;
   text-align: center;
@@ -227,6 +227,7 @@ input {
   position: relative;
   display: inline;
   pointer-events: none;
+  margin-bottom: 10px;
 }
 
 .go-register {

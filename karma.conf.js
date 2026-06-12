@@ -9,6 +9,7 @@ module.exports = function (config) {
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
       require('karma-coverage'),
+      require('karma-junit-reporter'),
       require('@angular-devkit/build-angular/plugins/karma')
     ],
 
@@ -25,7 +26,13 @@ module.exports = function (config) {
       ]
     },
 
-    reporters: ['progress', 'coverage'],
+    junitReporter: {
+      outputDir: 'test-results',
+      outputFile: 'results.xml',
+      useBrowserName: false
+    },
+
+    reporters: ['progress', 'coverage', 'junit'],
 
     port: 9876,
     colors: true,
@@ -45,7 +52,7 @@ module.exports = function (config) {
           '--disable-gpu',
           '--disable-dev-shm-usage',
           '--disable-software-rasterizer',
-          '--remote-debugging-port=9222' // ⭐ importante em CI
+          '--remote-debugging-port=9222'
         ]
       }
     }

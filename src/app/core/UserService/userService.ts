@@ -12,9 +12,7 @@ export class UserService {
   }
 
   login(email: string, password: string): Observable<number> {
-    const emailEncod = encodeURIComponent(email);
-    const passwordEncod = encodeURIComponent(password);
-  return this.httpclient.get<number>(`${API_PATH}/users/login/${emailEncod}/${passwordEncod}`);
+    return this.httpclient.post<number>(`${API_PATH}/users/login`,{ email, password });
   }
   errorMessage: string = '';
 
@@ -24,6 +22,10 @@ export class UserService {
       .pipe(
         catchError(this.errorHandler)
       );
+  }
+
+  checkEmailExists(email: string): Observable<boolean> {
+    return this.httpclient.get<boolean>(`${API_PATH}/users/check-email?email=${email}`).pipe(catchError(this.errorHandler));
   }
 
   private errorHandler(error: HttpErrorResponse) {

@@ -4,14 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { AccountService } from '../../core/Account/accountService';
 import { AccountInterface } from '../../core/Account/accountInterface';
 import { Alert } from '../alert/alert/alert';
-import { timer } from 'rxjs';
+import { switchMap, timer } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-central-emails',
   standalone: true,
   imports: [CommonModule, RouterLink, FormsModule, Alert],
-  templateUrl: './central-emails.html',
+  templateUrl: './central-emails.html', 
   styleUrls: ['./central-emails.css'],
 })
 export class CentralEmails implements OnInit {
@@ -20,6 +20,11 @@ export class CentralEmails implements OnInit {
   showModal = false;
   newEmail = '';
   isLoadingModal = false;
+  showPasswordModal = false;
+  checkPasswordConsent = false;
+  newPassword = '';
+  passwordResult = '';
+  isCheckingPassword = false;
 
   showAlert = false;
   alertMessage = '';
@@ -43,12 +48,14 @@ export class CentralEmails implements OnInit {
   }
 
   openModal(): void {
-    this.showModal = true;
+    this.showModal = true
     this.newEmail = '';
   }
 
   closeModal(): void {
     this.showModal = false;
+    this.newPassword = '';
+    this.passwordResult = '';
   }
 
   openDetail(emailMonitored: string): void {
@@ -66,7 +73,8 @@ export class CentralEmails implements OnInit {
   addEmail(): void {
     if (!this.newEmail) return;
     this.isLoadingModal = true;
-    this.accountService.addMonitored(this.userId, this.newEmail).subscribe({
+    this.accountService.addMonitored(this.userId, this.newEmail)
+    .subscribe({
       next: () => {
         this.isLoadingModal = false;
         this.showModal = false;
@@ -75,7 +83,7 @@ export class CentralEmails implements OnInit {
         this.alertType = 'success';
         this.showAlert = true;
         this.cdr.detectChanges();
-        timer(3500).subscribe(() => {
+        timer(2000).subscribe(() => {
           this.loadEmails();
         });
       },
@@ -90,7 +98,7 @@ export class CentralEmails implements OnInit {
     });
   }
 
-  deleteEmail(id: number): void {
+  deleteEmailId(id: number): void {
     this.accountService.deleteById(id).subscribe({
       next: () => {
         this.alertTitle = 'Sucesso';
@@ -100,13 +108,46 @@ export class CentralEmails implements OnInit {
         this.loadEmails();
         this.cdr.detectChanges();
       },
-      error: () => {
+      error: (err: any) => {
+        if (err.status === 429) {
+          this.alertMessage = 'Muitas tentativas. Aguarde alguns segundos.';
+          this.alertType = 'warning';
+          this.showAlert = true;
+        } else {
+          this.alertTitle = 'Erro';
+          this.alertMessage = 'Não foi possível remover o email.';
+          this.alertType = 'error';
+        }
+          this.showAlert = true;
+          this.cdr.detectChanges();
+      }
+    });
+  }
+
+
+  deleteByEmail(email: string): void {
+    this.accountService.deleteByEmail(email).subscribe({
+      next: () => {
+        this.alertTitle = 'Sucesso';
+        this.alertMessage = 'Email removido com sucesso!';
+        this.alertType = 'success';
+        this.showAlert = true;
+        this.loadEmails();
+        this.cdr.detectChanges();
+      },
+      error: (err: any) => {
+        if (err.status === 429) {
+          this.alertMessage = 'Muitas tentativas. Aguarde alguns segundos.';
+          this.alertType = 'warning';
+          this.showAlert = true;
+        } else {
         this.alertTitle = 'Erro';
         this.alertMessage = 'Não foi possível remover o email.';
         this.alertType = 'error';
+        }
         this.showAlert = true;
         this.cdr.detectChanges();
-      }
+    }
     });
   }
 
@@ -153,7 +194,12 @@ export class CentralEmails implements OnInit {
         this.isLoading = false;
         this.cdr.detectChanges();
       },
-      error: () => {
+      error: (err: any) => {
+        if (err.status === 429) {
+          this.alertMessage = 'Muitas tentativas. Aguarde alguns segundos.';
+          this.alertType = 'warning';
+          this.showAlert = true;
+        }
         this.isLoading = false;
         this.cdr.detectChanges();
       }
@@ -189,12 +235,49 @@ export class CentralEmails implements OnInit {
         next: () => {
           setTimeout(() => refreshSequencial(index + 1), 2000);
         },
-        error: () => {
+        error: (err: any) => {
+          if (err.status === 429) {
+            this.alertMessage = 'Muitas tentativas. Aguarde alguns segundos.';
+            this.alertType = 'warning';
+            this.showAlert = true;
+          } else {
           setTimeout(() => refreshSequencial(index + 1), 2000);
+          }
         }
       });
     };
 
     refreshSequencial(0);
+  }
+
+  checkPassword(): void {
+  if (!this.newPassword) return;
+  this.isCheckingPassword = true;
+  this.passwordResult = '';
+  this.accountService.checkPassword(this.newPassword).subscribe({
+    next: (result) => {
+      this.isCheckingPassword = false;
+      this.passwordResult = result;
+      this.cdr.detectChanges();
+    },
+    error: () => {
+      this.isCheckingPassword = false;
+      this.passwordResult = 'Erro ao verificar senha.';
+      this.cdr.detectChanges();
+    }
+    });
+  }
+
+  openPasswordModal(): void {
+  this.showPasswordModal = true;
+  this.newPassword = '';
+  this.passwordResult = '';
+  }
+
+  closePasswordModal(): void {
+    this.showPasswordModal = false;
+
+    this.newPassword = '';
+    this.passwordResult = '';
   }
 }

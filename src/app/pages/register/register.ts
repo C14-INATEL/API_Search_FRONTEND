@@ -1,13 +1,13 @@
-import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { UserService } from '../../core/UserService/userService';
 import { userInterface } from '../../core/UserService/userInterface';
 import { Alert } from '../alert/alert/alert';
+import { AccountService } from '../../core/Account/accountService';
 
 // Funções que validam os campos do formulário
-
 // Verifica se o campo nome tem no mínimo 5 caracteres e se tem apenas letras e espaços
 
 function strictNameValidator(control: AbstractControl): ValidationErrors | null {
@@ -68,15 +68,15 @@ export class Register implements OnInit {
   showAlert = false;
   alertMessage = '';
   alertTitle = '';
-  alertType: 'success' | 'error' | 'warning' = 'success'; 
-
+  alertType: 'success' | 'error' | 'warning' = 'success';
   mostrarSenha: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private accountService: AccountService
   ) {}
 
   ngOnInit(): void {
@@ -169,10 +169,11 @@ export class Register implements OnInit {
     const userData: userInterface = {
       name: this.registerForm.value.name,
       email: this.registerForm.value.email,
-      password: this.registerForm.value.password
+      password: encodeURIComponent(this.registerForm.value.password)
     };
 
-    this.userService.saveUser(userData).subscribe({
+    this.userService.saveUser(userData)
+    .subscribe({
       next: (response) => {
         this.isLoading = false;
         this.alertTitle = 'Sucesso';
