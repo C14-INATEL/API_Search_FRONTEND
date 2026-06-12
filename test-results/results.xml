@@ -1,155 +1,155 @@
 <?xml version="1.0"?>
-<testsuite name="Chrome Headless 148.0.0.0 (Linux 0.0.0)" package="" timestamp="2026-06-12T23:29:41" id="0" hostname="kali" tests="132" errors="0" failures="0" time="0.925">
+<testsuite name="Chrome Headless 148.0.0.0 (Linux 0.0.0)" package="" timestamp="2026-06-12T23:39:21" id="0" hostname="kali" tests="132" errors="0" failures="0" time="0.848">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36"/>
   </properties>
-  <testcase name="Login Creating component should to init with show password in status with false" time="0.114" classname="Login Creating component"/>
-  <testcase name="Login Creating component should creating with success" time="0.012" classname="Login Creating component"/>
-  <testcase name="Login Creating component should init the form correctly" time="0.008" classname="Login Creating component"/>
-  <testcase name="Login login() method should show warning alert on 429 error (Too Many Requests)" time="0.022" classname="Login login() method"/>
-  <testcase name="Login login() method should show error alert on wrong credentials" time="0.011" classname="Login login() method"/>
-  <testcase name="Login login() method should show alert if email is invalid" time="0.014" classname="Login login() method"/>
-  <testcase name="Login login() method should call userService and navigate on success" time="0.009" classname="Login login() method"/>
-  <testcase name="Login login() method should show alert if form is empty" time="0.009" classname="Login login() method"/>
-  <testcase name="Login Alerts should close alert when onAlertClose is called" time="0.006" classname="Login Alerts"/>
-  <testcase name="Login Estrutura do template should own the field email" time="0.008" classname="Login Estrutura do template"/>
-  <testcase name="Login Estrutura do template Should own the field the button &quot;registrar-se&quot;" time="0.006" classname="Login Estrutura do template"/>
-  <testcase name="Login Estrutura do template Should the own the logo of aplication" time="0.005" classname="Login Estrutura do template"/>
-  <testcase name="Login Estrutura do template Should own the field the button forget password" time="0" classname="Login Estrutura do template">
-    <skipped/>
-  </testcase>
-  <testcase name="Login Estrutura do template should show title &quot;SAFE ACCOUNTS&quot;" time="0.006" classname="Login Estrutura do template"/>
-  <testcase name="Login Estrutura do template should own the field &quot;Entrar&quot;" time="0.006" classname="Login Estrutura do template"/>
-  <testcase name="Login Navigation (routerLink) The button &quot;registrar-se&quot; should have routerLink=&quot;/register&quot;" time="0.005" classname="Login Navigation (routerLink)"/>
+  <testcase name="CentralEmails Creating component Should start newEmail as empty" time="0.12" classname="CentralEmails Creating component"/>
+  <testcase name="CentralEmails Creating component Should start showAlert as false" time="0.006" classname="CentralEmails Creating component"/>
+  <testcase name="CentralEmails Creating component Should start newPassword as empty" time="0.007" classname="CentralEmails Creating component"/>
+  <testcase name="CentralEmails Creating component Should start showModal as false" time="0.006" classname="CentralEmails Creating component"/>
+  <testcase name="CentralEmails Creating component Should start isLoading as false after load" time="0.006" classname="CentralEmails Creating component"/>
+  <testcase name="CentralEmails Creating component Should start passwordResult as empty" time="0.005" classname="CentralEmails Creating component"/>
+  <testcase name="CentralEmails Creating component Should start showPasswordModal as false" time="0.006" classname="CentralEmails Creating component"/>
+  <testcase name="CentralEmails Creating component Should start isCheckingPassword as false" time="0.004" classname="CentralEmails Creating component"/>
+  <testcase name="CentralEmails Creating component Should start showDetailModal as false" time="0.006" classname="CentralEmails Creating component"/>
+  <testcase name="CentralEmails Creating component Should create component with success" time="0.006" classname="CentralEmails Creating component"/>
+  <testcase name="CentralEmails openDetail() / closeDetail() Should reset selectedBreaches on close" time="0.004" classname="CentralEmails openDetail() / closeDetail()"/>
+  <testcase name="CentralEmails openDetail() / closeDetail() Should set selectedEmail" time="0.003" classname="CentralEmails openDetail() / closeDetail()"/>
+  <testcase name="CentralEmails openDetail() / closeDetail() Should reset selectedEmail on close" time="0.004" classname="CentralEmails openDetail() / closeDetail()"/>
+  <testcase name="CentralEmails openDetail() / closeDetail() Should close detail modal" time="0.006" classname="CentralEmails openDetail() / closeDetail()"/>
+  <testcase name="CentralEmails openDetail() / closeDetail() Should open detail modal" time="0.005" classname="CentralEmails openDetail() / closeDetail()"/>
+  <testcase name="CentralEmails openDetail() / closeDetail() Should filter selectedBreaches by email" time="0.007" classname="CentralEmails openDetail() / closeDetail()"/>
+  <testcase name="CentralEmails uniqueEmails getter Should return empty when emails is empty" time="0.007" classname="CentralEmails uniqueEmails getter"/>
+  <testcase name="CentralEmails uniqueEmails getter Should return unique emails only" time="0.005" classname="CentralEmails uniqueEmails getter"/>
+  <testcase name="CentralEmails logout() Should remove userId from localStorage" time="0.009" classname="CentralEmails logout()"/>
+  <testcase name="CentralEmails logout() Should navigate to /login" time="0.005" classname="CentralEmails logout()"/>
+  <testcase name="CentralEmails toggleExpand() Should collapse if same id clicked again" time="0.003" classname="CentralEmails toggleExpand()"/>
+  <testcase name="CentralEmails toggleExpand() Should set expandedBreachId" time="0.003" classname="CentralEmails toggleExpand()"/>
+  <testcase name="CentralEmails addEmail() Should not call service if newEmail is empty" time="0.003" classname="CentralEmails addEmail()"/>
+  <testcase name="CentralEmails addEmail() Should call addMonitored with userId and email" time="0.009" classname="CentralEmails addEmail()"/>
+  <testcase name="CentralEmails addEmail() Should show success alert after add" time="0.006" classname="CentralEmails addEmail()"/>
+  <testcase name="CentralEmails addEmail() Should show error alert when add fails" time="0.006" classname="CentralEmails addEmail()"/>
+  <testcase name="CentralEmails ngOnInit() Should call loadEmails on init" time="0.005" classname="CentralEmails ngOnInit()"/>
+  <testcase name="CentralEmails ngOnInit() Should populate emails after load" time="0.005" classname="CentralEmails ngOnInit()"/>
+  <testcase name="CentralEmails onAlertClose() Should hide alert" time="0.004" classname="CentralEmails onAlertClose()"/>
+  <testcase name="CentralEmails openModal() / closeModal() Should reset newPassword when close modal" time="0.007" classname="CentralEmails openModal() / closeModal()"/>
+  <testcase name="CentralEmails openModal() / closeModal() Should open modal" time="0.005" classname="CentralEmails openModal() / closeModal()"/>
+  <testcase name="CentralEmails openModal() / closeModal() Should close modal" time="0.003" classname="CentralEmails openModal() / closeModal()"/>
+  <testcase name="CentralEmails openModal() / closeModal() Should reset newEmail when open modal" time="0.004" classname="CentralEmails openModal() / closeModal()"/>
+  <testcase name="CentralEmails openModal() / closeModal() Should reset passwordResult when close modal" time="0.003" classname="CentralEmails openModal() / closeModal()"/>
+  <testcase name="CentralEmails deleteByEmail() Should call deleteByEmail on service" time="0.004" classname="CentralEmails deleteByEmail()"/>
+  <testcase name="CentralEmails deleteByEmail() Should show success alert after delete" time="0.004" classname="CentralEmails deleteByEmail()"/>
+  <testcase name="CentralEmails deleteByEmail() Should show error alert when delete fails" time="0.005" classname="CentralEmails deleteByEmail()"/>
+  <testcase name="CentralEmails formatCount() Should return number as string" time="0.004" classname="CentralEmails formatCount()"/>
+  <testcase name="CentralEmails formatCount() Should return — for null" time="0.003" classname="CentralEmails formatCount()"/>
+  <testcase name="CentralEmails formatCount() Should format thousands" time="0.003" classname="CentralEmails formatCount()"/>
+  <testcase name="CentralEmails formatCount() Should format millions" time="0.003" classname="CentralEmails formatCount()"/>
+  <testcase name="CentralEmails breachCount() Should return correct breach count" time="0.003" classname="CentralEmails breachCount()"/>
+  <testcase name="CentralEmails breachCount() Should return 0 when no breaches" time="0.003" classname="CentralEmails breachCount()"/>
+  <testcase name="CentralEmails checkPassword() Should set isCheckingPassword to false after success" time="0.003" classname="CentralEmails checkPassword()"/>
+  <testcase name="CentralEmails checkPassword() Should set passwordResult when password is leaked" time="0.004" classname="CentralEmails checkPassword()"/>
+  <testcase name="CentralEmails checkPassword() Should set passwordResult when password is safe" time="0.003" classname="CentralEmails checkPassword()"/>
+  <testcase name="CentralEmails checkPassword() Should not call service if newPassword is empty" time="0.003" classname="CentralEmails checkPassword()"/>
+  <testcase name="CentralEmails checkPassword() Should call accountService.checkPassword with newPassword" time="0.004" classname="CentralEmails checkPassword()"/>
+  <testcase name="CentralEmails checkPassword() Should set isCheckingPassword to false after error" time="0.003" classname="CentralEmails checkPassword()"/>
+  <testcase name="CentralEmails checkPassword() Should set passwordResult to error message when service fails" time="0.003" classname="CentralEmails checkPassword()"/>
+  <testcase name="CentralEmails openPasswordModal() / closePasswordModal() Should reset newPassword when open password modal" time="0.003" classname="CentralEmails openPasswordModal() / closePasswordModal()"/>
+  <testcase name="CentralEmails openPasswordModal() / closePasswordModal() Should open password modal" time="0.004" classname="CentralEmails openPasswordModal() / closePasswordModal()"/>
+  <testcase name="CentralEmails openPasswordModal() / closePasswordModal() Should reset newPassword when close password modal" time="0.003" classname="CentralEmails openPasswordModal() / closePasswordModal()"/>
+  <testcase name="CentralEmails openPasswordModal() / closePasswordModal() Should reset passwordResult when close password modal" time="0.003" classname="CentralEmails openPasswordModal() / closePasswordModal()"/>
+  <testcase name="CentralEmails openPasswordModal() / closePasswordModal() Should reset passwordResult when open password modal" time="0.002" classname="CentralEmails openPasswordModal() / closePasswordModal()"/>
+  <testcase name="CentralEmails openPasswordModal() / closePasswordModal() Should close password modal" time="0.003" classname="CentralEmails openPasswordModal() / closePasswordModal()"/>
+  <testcase name="Register Creating component Should start with mostrarSenha = false" time="0.027" classname="Register Creating component"/>
+  <testcase name="Register Creating component Should create component with success" time="0.008" classname="Register Creating component"/>
+  <testcase name="Register Creating component Should start form with empty values" time="0.006" classname="Register Creating component"/>
+  <testcase name="Register isLoading Should set isLoading to true when save starts" time="0.006" classname="Register isLoading"/>
+  <testcase name="Register isLoading Should start isLoading as false" time="0.005" classname="Register isLoading"/>
+  <testcase name="Register isLoading Should set isLoading to false after save error" time="0.021" classname="Register isLoading"/>
+  <testcase name="Register isLoading Should set isLoading to false after save success" time="0.008" classname="Register isLoading"/>
+  <testcase name="Register Alert behavior Should not navigate when close alert with error" time="0.006" classname="Register Alert behavior"/>
+  <testcase name="Register Alert behavior Should hide alert when onAlertClose is called" time="0.007" classname="Register Alert behavior"/>
+  <testcase name="Register Alert behavior Should navigate to /login when close alert with success" time="0.006" classname="Register Alert behavior"/>
+  <testcase name="Register save() Should show alert with type error when save fails" time="0.009" classname="Register save()"/>
+  <testcase name="Register save() Should handle with error when save user" time="0.008" classname="Register save()"/>
+  <testcase name="Register save() Should call userService.saveUser with form data" time="0.009" classname="Register save()"/>
+  <testcase name="Register save() Should show alert with type success when save with success" time="0.008" classname="Register save()"/>
+  <testcase name="Register save() Should call save() when click in button Registrar" time="0.007" classname="Register save()"/>
+  <testcase name="Register Reactive Form Binding Should update email control" time="0.006" classname="Register Reactive Form Binding"/>
+  <testcase name="Register Reactive Form Binding Should update password control" time="0.007" classname="Register Reactive Form Binding"/>
+  <testcase name="Register Reactive Form Binding Should update name control" time="0.006" classname="Register Reactive Form Binding"/>
+  <testcase name="Register Verifyng Alert Window open Should show error alert if required fields are empty" time="0.006" classname="Register Verifyng Alert Window open"/>
+  <testcase name="Register Verifyng Alert Window open Should show error alert if email is invalid or has wrong domain" time="0.008" classname="Register Verifyng Alert Window open"/>
+  <testcase name="Register Verifyng Alert Window open Should show error alert if password lacks complexity" time="0.008" classname="Register Verifyng Alert Window open"/>
+  <testcase name="Register Verifyng Alert Window open Should show error alert if name has numbers or symbols" time="0.008" classname="Register Verifyng Alert Window open"/>
+  <testcase name="Register Verifyng Alert Window open Should show error alert if name is too short" time="0.008" classname="Register Verifyng Alert Window open"/>
+  <testcase name="Register Verifyng Alert Window open Should show error alert if passwords do not match" time="0.008" classname="Register Verifyng Alert Window open"/>
+  <testcase name="Register Navigation (routerLink) Button Entrar should have routerLink=&quot;/login&quot;" time="0.005" classname="Register Navigation (routerLink)"/>
+  <testcase name="Register toggleSenha() Should active toggle when click in .show-icon" time="0.006" classname="Register toggleSenha()"/>
+  <testcase name="Register toggleSenha() Should change show password of true to false" time="0.006" classname="Register toggleSenha()"/>
+  <testcase name="Register toggleSenha() The field confirm password should be password when show password = false" time="0.004" classname="Register toggleSenha()"/>
+  <testcase name="Register toggleSenha() Should be active toggle when click in .hide-icon" time="0.006" classname="Register toggleSenha()"/>
+  <testcase name="Register toggleSenha() The field password should be password when show password = false" time="0.005" classname="Register toggleSenha()"/>
+  <testcase name="Register toggleSenha() The field confirm password should be text when show password = true" time="0.006" classname="Register toggleSenha()"/>
+  <testcase name="Register toggleSenha() Should change show password of false to true" time="0.004" classname="Register toggleSenha()"/>
+  <testcase name="Register toggleSenha() The field password should be text when show password = true" time="0.005" classname="Register toggleSenha()"/>
+  <testcase name="Register Structure of template Should have the button Entrar" time="0.004" classname="Register Structure of template"/>
+  <testcase name="Register Structure of template Should have the email field" time="0.004" classname="Register Structure of template"/>
+  <testcase name="Register Structure of template Should have the password field" time="0.004" classname="Register Structure of template"/>
+  <testcase name="Register Structure of template Should have the button Registrar" time="0.005" classname="Register Structure of template"/>
+  <testcase name="Register Structure of template Should show title &quot;SAFE ACCOUNTS&quot;" time="0.005" classname="Register Structure of template"/>
+  <testcase name="Register Structure of template Should have the logo in application" time="0.004" classname="Register Structure of template"/>
+  <testcase name="Register Structure of template Should have the name field" time="0.004" classname="Register Structure of template"/>
+  <testcase name="Register Structure of template Should have the confirm field" time="0.004" classname="Register Structure of template"/>
+  <testcase name="NewPassword should create" time="0.014" classname="NewPassword"/>
+  <testcase name="Alert should create" time="0.002" classname="Alert"/>
+  <testcase name="Home Navigation Buttons should navigate to register page" time="0.012" classname="Home Navigation Buttons"/>
+  <testcase name="Home Navigation Buttons should navigate to login page" time="0.003" classname="Home Navigation Buttons"/>
+  <testcase name="Home Support Button should open support email" time="0.002" classname="Home Support Button"/>
+  <testcase name="User should create" time="0.002" classname="User"/>
+  <testcase name="UserService should be created" time="0.001" classname="UserService"/>
+  <testcase name="Login Alerts should close alert when onAlertClose is called" time="0.019" classname="Login Alerts"/>
+  <testcase name="Login Form Validation should validate form when filled correctly" time="0.006" classname="Login Form Validation"/>
+  <testcase name="Login Form Validation should invalidate form when empty" time="0.004" classname="Login Form Validation"/>
+  <testcase name="Login Form Validation should validate email format and domain" time="0.005" classname="Login Form Validation"/>
+  <testcase name="Login Creating component should creating with success" time="0.004" classname="Login Creating component"/>
+  <testcase name="Login Creating component should init the form correctly" time="0.006" classname="Login Creating component"/>
+  <testcase name="Login Creating component should to init with show password in status with false" time="0.007" classname="Login Creating component"/>
+  <testcase name="Login toggleSenha() Should alternate show password of false to true" time="0.005" classname="Login toggleSenha()"/>
+  <testcase name="Login toggleSenha() Should alternate show password of true to false" time="0.005" classname="Login toggleSenha()"/>
   <testcase name="Login Navigation (routerLink) The button &quot;senha&quot; should have routerLink=&quot;/forgot-password&quot;" time="0" classname="Login Navigation (routerLink)">
     <skipped/>
   </testcase>
-  <testcase name="Login Form Validation should invalidate form when empty" time="0.006" classname="Login Form Validation"/>
-  <testcase name="Login Form Validation should validate email format and domain" time="0.004" classname="Login Form Validation"/>
-  <testcase name="Login Form Validation should validate form when filled correctly" time="0.008" classname="Login Form Validation"/>
-  <testcase name="Login toggleSenha() Should alternate show password of false to true" time="0.004" classname="Login toggleSenha()"/>
-  <testcase name="Login toggleSenha() Should alternate show password of true to false" time="0.006" classname="Login toggleSenha()"/>
-  <testcase name="Home Support Button should open support email" time="0.015" classname="Home Support Button"/>
-  <testcase name="Home Navigation Buttons should navigate to register page" time="0.004" classname="Home Navigation Buttons"/>
-  <testcase name="Home Navigation Buttons should navigate to login page" time="0.004" classname="Home Navigation Buttons"/>
-  <testcase name="UserService should be created" time="0.002" classname="UserService"/>
-  <testcase name="NewPassword should create" time="0.017" classname="NewPassword"/>
-  <testcase name="Register toggleSenha() The field password should be password when show password = false" time="0.025" classname="Register toggleSenha()"/>
-  <testcase name="Register toggleSenha() The field password should be text when show password = true" time="0.005" classname="Register toggleSenha()"/>
-  <testcase name="Register toggleSenha() Should active toggle when click in .show-icon" time="0.007" classname="Register toggleSenha()"/>
-  <testcase name="Register toggleSenha() Should change show password of true to false" time="0.006" classname="Register toggleSenha()"/>
-  <testcase name="Register toggleSenha() Should be active toggle when click in .hide-icon" time="0.006" classname="Register toggleSenha()"/>
-  <testcase name="Register toggleSenha() Should change show password of false to true" time="0.004" classname="Register toggleSenha()"/>
-  <testcase name="Register toggleSenha() The field confirm password should be password when show password = false" time="0.006" classname="Register toggleSenha()"/>
-  <testcase name="Register toggleSenha() The field confirm password should be text when show password = true" time="0.005" classname="Register toggleSenha()"/>
-  <testcase name="Register Navigation (routerLink) Button Entrar should have routerLink=&quot;/login&quot;" time="0.007" classname="Register Navigation (routerLink)"/>
-  <testcase name="Register Creating component Should start with mostrarSenha = false" time="0.005" classname="Register Creating component"/>
-  <testcase name="Register Creating component Should start form with empty values" time="0.007" classname="Register Creating component"/>
-  <testcase name="Register Creating component Should create component with success" time="0.005" classname="Register Creating component"/>
-  <testcase name="Register Structure of template Should have the confirm field" time="0.006" classname="Register Structure of template"/>
-  <testcase name="Register Structure of template Should have the logo in application" time="0.004" classname="Register Structure of template"/>
-  <testcase name="Register Structure of template Should have the button Entrar" time="0.005" classname="Register Structure of template"/>
-  <testcase name="Register Structure of template Should have the name field" time="0.004" classname="Register Structure of template"/>
-  <testcase name="Register Structure of template Should show title &quot;SAFE ACCOUNTS&quot;" time="0.011" classname="Register Structure of template"/>
-  <testcase name="Register Structure of template Should have the password field" time="0.004" classname="Register Structure of template"/>
-  <testcase name="Register Structure of template Should have the email field" time="0.004" classname="Register Structure of template"/>
-  <testcase name="Register Structure of template Should have the button Registrar" time="0.004" classname="Register Structure of template"/>
-  <testcase name="Register Reactive Form Binding Should update email control" time="0.006" classname="Register Reactive Form Binding"/>
-  <testcase name="Register Reactive Form Binding Should update name control" time="0.004" classname="Register Reactive Form Binding"/>
-  <testcase name="Register Reactive Form Binding Should update password control" time="0.008" classname="Register Reactive Form Binding"/>
-  <testcase name="Register Verifyng Alert Window open Should show error alert if email is invalid or has wrong domain" time="0.009" classname="Register Verifyng Alert Window open"/>
-  <testcase name="Register Verifyng Alert Window open Should show error alert if name has numbers or symbols" time="0.009" classname="Register Verifyng Alert Window open"/>
-  <testcase name="Register Verifyng Alert Window open Should show error alert if passwords do not match" time="0.01" classname="Register Verifyng Alert Window open"/>
-  <testcase name="Register Verifyng Alert Window open Should show error alert if password lacks complexity" time="0.009" classname="Register Verifyng Alert Window open"/>
-  <testcase name="Register Verifyng Alert Window open Should show error alert if name is too short" time="0.009" classname="Register Verifyng Alert Window open"/>
-  <testcase name="Register Verifyng Alert Window open Should show error alert if required fields are empty" time="0.007" classname="Register Verifyng Alert Window open"/>
-  <testcase name="Register isLoading Should set isLoading to true when save starts" time="0.005" classname="Register isLoading"/>
-  <testcase name="Register isLoading Should set isLoading to false after save success" time="0.011" classname="Register isLoading"/>
-  <testcase name="Register isLoading Should start isLoading as false" time="0.005" classname="Register isLoading"/>
-  <testcase name="Register isLoading Should set isLoading to false after save error" time="0.01" classname="Register isLoading"/>
-  <testcase name="Register save() Should handle with error when save user" time="0.009" classname="Register save()"/>
-  <testcase name="Register save() Should call save() when click in button Registrar" time="0.005" classname="Register save()"/>
-  <testcase name="Register save() Should show alert with type error when save fails" time="0.009" classname="Register save()"/>
-  <testcase name="Register save() Should show alert with type success when save with success" time="0.01" classname="Register save()"/>
-  <testcase name="Register save() Should call userService.saveUser with form data" time="0.011" classname="Register save()"/>
-  <testcase name="Register Alert behavior Should not navigate when close alert with error" time="0.007" classname="Register Alert behavior"/>
-  <testcase name="Register Alert behavior Should hide alert when onAlertClose is called" time="0.008" classname="Register Alert behavior"/>
-  <testcase name="Register Alert behavior Should navigate to /login when close alert with success" time="0.006" classname="Register Alert behavior"/>
-  <testcase name="CentralEmails openDetail() / closeDetail() Should reset selectedEmail on close" time="0.055" classname="CentralEmails openDetail() / closeDetail()"/>
-  <testcase name="CentralEmails openDetail() / closeDetail() Should close detail modal" time="0.003" classname="CentralEmails openDetail() / closeDetail()"/>
-  <testcase name="CentralEmails openDetail() / closeDetail() Should set selectedEmail" time="0.005" classname="CentralEmails openDetail() / closeDetail()"/>
-  <testcase name="CentralEmails openDetail() / closeDetail() Should filter selectedBreaches by email" time="0.005" classname="CentralEmails openDetail() / closeDetail()"/>
-  <testcase name="CentralEmails openDetail() / closeDetail() Should open detail modal" time="0.005" classname="CentralEmails openDetail() / closeDetail()"/>
-  <testcase name="CentralEmails openDetail() / closeDetail() Should reset selectedBreaches on close" time="0.003" classname="CentralEmails openDetail() / closeDetail()"/>
-  <testcase name="CentralEmails onAlertClose() Should hide alert" time="0.005" classname="CentralEmails onAlertClose()"/>
-  <testcase name="CentralEmails logout() Should remove userId from localStorage" time="0.005" classname="CentralEmails logout()"/>
-  <testcase name="CentralEmails logout() Should navigate to /login" time="0.004" classname="CentralEmails logout()"/>
-  <testcase name="CentralEmails uniqueEmails getter Should return unique emails only" time="0.003" classname="CentralEmails uniqueEmails getter"/>
-  <testcase name="CentralEmails uniqueEmails getter Should return empty when emails is empty" time="0.01" classname="CentralEmails uniqueEmails getter"/>
-  <testcase name="CentralEmails breachCount() Should return correct breach count" time="0.004" classname="CentralEmails breachCount()"/>
-  <testcase name="CentralEmails breachCount() Should return 0 when no breaches" time="0.003" classname="CentralEmails breachCount()"/>
-  <testcase name="CentralEmails toggleExpand() Should set expandedBreachId" time="0.003" classname="CentralEmails toggleExpand()"/>
-  <testcase name="CentralEmails toggleExpand() Should collapse if same id clicked again" time="0.004" classname="CentralEmails toggleExpand()"/>
-  <testcase name="CentralEmails addEmail() Should show error alert when add fails" time="0.005" classname="CentralEmails addEmail()"/>
-  <testcase name="CentralEmails addEmail() Should call addMonitored with userId and email" time="0.006" classname="CentralEmails addEmail()"/>
-  <testcase name="CentralEmails addEmail() Should show success alert after add" time="0.005" classname="CentralEmails addEmail()"/>
-  <testcase name="CentralEmails addEmail() Should not call service if newEmail is empty" time="0.003" classname="CentralEmails addEmail()"/>
-  <testcase name="CentralEmails formatCount() Should return — for null" time="0.004" classname="CentralEmails formatCount()"/>
-  <testcase name="CentralEmails formatCount() Should format millions" time="0.004" classname="CentralEmails formatCount()"/>
-  <testcase name="CentralEmails formatCount() Should format thousands" time="0.003" classname="CentralEmails formatCount()"/>
-  <testcase name="CentralEmails formatCount() Should return number as string" time="0.004" classname="CentralEmails formatCount()"/>
-  <testcase name="CentralEmails openPasswordModal() / closePasswordModal() Should close password modal" time="0.003" classname="CentralEmails openPasswordModal() / closePasswordModal()"/>
-  <testcase name="CentralEmails openPasswordModal() / closePasswordModal() Should reset passwordResult when open password modal" time="0.004" classname="CentralEmails openPasswordModal() / closePasswordModal()"/>
-  <testcase name="CentralEmails openPasswordModal() / closePasswordModal() Should reset newPassword when open password modal" time="0.003" classname="CentralEmails openPasswordModal() / closePasswordModal()"/>
-  <testcase name="CentralEmails openPasswordModal() / closePasswordModal() Should open password modal" time="0.003" classname="CentralEmails openPasswordModal() / closePasswordModal()"/>
-  <testcase name="CentralEmails openPasswordModal() / closePasswordModal() Should reset passwordResult when close password modal" time="0.004" classname="CentralEmails openPasswordModal() / closePasswordModal()"/>
-  <testcase name="CentralEmails openPasswordModal() / closePasswordModal() Should reset newPassword when close password modal" time="0.002" classname="CentralEmails openPasswordModal() / closePasswordModal()"/>
-  <testcase name="CentralEmails deleteByEmail() Should show error alert when delete fails" time="0.005" classname="CentralEmails deleteByEmail()"/>
-  <testcase name="CentralEmails deleteByEmail() Should call deleteByEmail on service" time="0.004" classname="CentralEmails deleteByEmail()"/>
-  <testcase name="CentralEmails deleteByEmail() Should show success alert after delete" time="0.005" classname="CentralEmails deleteByEmail()"/>
-  <testcase name="CentralEmails openModal() / closeModal() Should reset passwordResult when close modal" time="0.003" classname="CentralEmails openModal() / closeModal()"/>
-  <testcase name="CentralEmails openModal() / closeModal() Should open modal" time="0.004" classname="CentralEmails openModal() / closeModal()"/>
-  <testcase name="CentralEmails openModal() / closeModal() Should close modal" time="0.003" classname="CentralEmails openModal() / closeModal()"/>
-  <testcase name="CentralEmails openModal() / closeModal() Should reset newEmail when open modal" time="0.004" classname="CentralEmails openModal() / closeModal()"/>
-  <testcase name="CentralEmails openModal() / closeModal() Should reset newPassword when close modal" time="0.004" classname="CentralEmails openModal() / closeModal()"/>
-  <testcase name="CentralEmails checkPassword() Should set isCheckingPassword to false after error" time="0.003" classname="CentralEmails checkPassword()"/>
-  <testcase name="CentralEmails checkPassword() Should set passwordResult to error message when service fails" time="0.004" classname="CentralEmails checkPassword()"/>
-  <testcase name="CentralEmails checkPassword() Should set passwordResult when password is safe" time="0.003" classname="CentralEmails checkPassword()"/>
-  <testcase name="CentralEmails checkPassword() Should set isCheckingPassword to false after success" time="0.004" classname="CentralEmails checkPassword()"/>
-  <testcase name="CentralEmails checkPassword() Should set passwordResult when password is leaked" time="0.003" classname="CentralEmails checkPassword()"/>
-  <testcase name="CentralEmails checkPassword() Should not call service if newPassword is empty" time="0.003" classname="CentralEmails checkPassword()"/>
-  <testcase name="CentralEmails checkPassword() Should call accountService.checkPassword with newPassword" time="0.004" classname="CentralEmails checkPassword()"/>
-  <testcase name="CentralEmails Creating component Should start showModal as false" time="0.004" classname="CentralEmails Creating component"/>
-  <testcase name="CentralEmails Creating component Should create component with success" time="0.003" classname="CentralEmails Creating component"/>
-  <testcase name="CentralEmails Creating component Should start isLoading as false after load" time="0.004" classname="CentralEmails Creating component"/>
-  <testcase name="CentralEmails Creating component Should start showAlert as false" time="0.003" classname="CentralEmails Creating component"/>
-  <testcase name="CentralEmails Creating component Should start newEmail as empty" time="0.004" classname="CentralEmails Creating component"/>
-  <testcase name="CentralEmails Creating component Should start passwordResult as empty" time="0.004" classname="CentralEmails Creating component"/>
-  <testcase name="CentralEmails Creating component Should start showPasswordModal as false" time="0.004" classname="CentralEmails Creating component"/>
-  <testcase name="CentralEmails Creating component Should start showDetailModal as false" time="0.004" classname="CentralEmails Creating component"/>
-  <testcase name="CentralEmails Creating component Should start isCheckingPassword as false" time="0.002" classname="CentralEmails Creating component"/>
-  <testcase name="CentralEmails Creating component Should start newPassword as empty" time="0.005" classname="CentralEmails Creating component"/>
-  <testcase name="CentralEmails ngOnInit() Should populate emails after load" time="0.003" classname="CentralEmails ngOnInit()"/>
-  <testcase name="CentralEmails ngOnInit() Should call loadEmails on init" time="0.004" classname="CentralEmails ngOnInit()"/>
-  <testcase name="App should create the app" time="0.005" classname="App"/>
+  <testcase name="Login Navigation (routerLink) The button &quot;registrar-se&quot; should have routerLink=&quot;/register&quot;" time="0.005" classname="Login Navigation (routerLink)"/>
+  <testcase name="Login login() method should call userService and navigate on success" time="0.007" classname="Login login() method"/>
+  <testcase name="Login login() method should show alert if email is invalid" time="0.007" classname="Login login() method"/>
+  <testcase name="Login login() method should show alert if form is empty" time="0.006" classname="Login login() method"/>
+  <testcase name="Login login() method should show error alert on wrong credentials" time="0.007" classname="Login login() method"/>
+  <testcase name="Login login() method should show warning alert on 429 error (Too Many Requests)" time="0.007" classname="Login login() method"/>
+  <testcase name="Login Estrutura do template should show title &quot;SAFE ACCOUNTS&quot;" time="0.004" classname="Login Estrutura do template"/>
+  <testcase name="Login Estrutura do template Should own the field the button forget password" time="0" classname="Login Estrutura do template">
+    <skipped/>
+  </testcase>
+  <testcase name="Login Estrutura do template should own the field email" time="0.004" classname="Login Estrutura do template"/>
+  <testcase name="Login Estrutura do template should own the field &quot;Entrar&quot;" time="0.004" classname="Login Estrutura do template"/>
+  <testcase name="Login Estrutura do template Should the own the logo of aplication" time="0.005" classname="Login Estrutura do template"/>
+  <testcase name="Login Estrutura do template Should own the field the button &quot;registrar-se&quot;" time="0.003" classname="Login Estrutura do template"/>
   <testcase name="ValidateToken should create" time="0.013" classname="ValidateToken"/>
-  <testcase name="User should create" time="0.004" classname="User"/>
-  <testcase name="Alert should create" time="0.002" classname="Alert"/>
-  <testcase name="authGuard deve permitir a navegação se o usuário estiver logado" time="0.003" classname="authGuard"/>
   <testcase name="authGuard deve bloquear a navegação e redirecionar para /login se NÃO estiver logado" time="0.002" classname="authGuard"/>
-  <testcase name="ForgotPassword should create" time="0.018" classname="ForgotPassword"/>
+  <testcase name="authGuard deve permitir a navegação se o usuário estiver logado" time="0.002" classname="authGuard"/>
+  <testcase name="ForgotPassword should create" time="0.019" classname="ForgotPassword"/>
+  <testcase name="App should create the app" time="0.003" classname="App"/>
   <testcase name="Sum Util should sum two numbers" time="0" classname="Sum Util"/>
   <system-out>
-    <![CDATA[Chrome Headless 148.0.0.0 (Linux 0.0.0) ERROR: 'Error: The email must be valid.'
+    <![CDATA[Chrome Headless 148.0.0.0 (Linux 0.0.0) ERROR: 'Error saving user:', 'erro'
+,Chrome Headless 148.0.0.0 (Linux 0.0.0) ERROR: 'Error saving user:', 'erro'
 ,Chrome Headless 148.0.0.0 (Linux 0.0.0) ERROR: 'Error: All fields are required.'
 ,Chrome Headless 148.0.0.0 (Linux 0.0.0) ERROR: 'Error: The email must be valid.'
-,Chrome Headless 148.0.0.0 (Linux 0.0.0) ERROR: 'Error: Invalid Name.'
-,Chrome Headless 148.0.0.0 (Linux 0.0.0) ERROR: 'Error: Passwords do not match.'
 ,Chrome Headless 148.0.0.0 (Linux 0.0.0) ERROR: 'Error: Password fields must meet the requirements: 12 characters, 1 uppercase letter, 1 number and 1 symbol.'
+,Chrome Headless 148.0.0.0 (Linux 0.0.0) ERROR: 'Error: Invalid Name.'
 ,Chrome Headless 148.0.0.0 (Linux 0.0.0) ERROR: 'Error: Name too short.'
+,Chrome Headless 148.0.0.0 (Linux 0.0.0) ERROR: 'Error: Passwords do not match.'
+,Chrome Headless 148.0.0.0 (Linux 0.0.0) ERROR: 'Error: The email must be valid.'
 ,Chrome Headless 148.0.0.0 (Linux 0.0.0) ERROR: 'Error: All fields are required.'
-,Chrome Headless 148.0.0.0 (Linux 0.0.0) ERROR: 'Error saving user:', 'erro'
-,Chrome Headless 148.0.0.0 (Linux 0.0.0) ERROR: 'Error saving user:', 'erro'
 
 ]]>
   </system-out>
