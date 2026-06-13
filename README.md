@@ -182,6 +182,10 @@ No FrontEnd Na questão visual, tanto css quanto html foram feitas a mão, utili
 
 <img src="/src/assets/readme-photos/UserHistory-Photos/6.jpeg" width="500">
 
+##### Ver detalhes de um vazamento e associar a Fonte
+
+<img src="/src/assets/readme-photos/UserHistory-Photos/7.jpeg" width="500">
+
 ## Documentação associada ao Projeto
 
 Caso não consiga acessar algun dos links abaixo, favor enviar email a **igor.luan.solutions@gmail.com** para receber o devido acesso
